@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent"
+    android:weightSum="4" xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/annual"
+        android:id="@+id/annual"
+        android:scaleType="fitXY"
+        android:layout_weight="1"
+
+        android:gravity="center"
+        android:textSize="40sp"
+        android:background="#e55b5b"
+        />
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+        android:scaleType="fitXY"
+
+        >
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scaleType="fitXY"
+
+            android:id="@+id/plig_lay"
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#5fe85a"
+
+                android:src="@drawable/ic_pilgrimage"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/pilgrimage"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#5fe85a"
+                android:id="@+id/plig" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scaleType="fitXY"
+
+            android:id="@+id/death_lay"
+
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#0caf07"
+
+                android:src="@drawable/death"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/death"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#0caf07"
+                android:id="@+id/death" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:scaleType="fitXY"
+        android:layout_weight="1"
+
+        >
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scaleType="fitXY"
+
+            android:id="@+id/mili_lay"
+
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#ea7507"
+
+                android:src="@drawable/military"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/military"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#ea7507"
+                android:id="@+id/military" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scaleType="fitXY"
+
+
+            android:id="@+id/mar_lay"
+
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#af5807"
+
+                android:src="@drawable/marriage"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/marriage"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#af5807"
+                android:id="@+id/marriage" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:scaleType="fitXY"
+
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/sick_lay"
+            android:scaleType="fitXY"
+
+
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#1980c4"
+
+                android:src="@drawable/sick"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/sickness"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#1980c4"
+                android:id="@+id/sickness" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/stu_lay"
+            android:scaleType="fitXY"
+
+
+            >
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:background="#1922c4"
+
+                android:src="@drawable/study"/>
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+
+                android:scaleType="fitXY"
+                android:text="@string/study"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="#1922c4"
+                android:id="@+id/study" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+
+

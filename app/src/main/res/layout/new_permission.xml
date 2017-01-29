@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <DatePicker
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker_new_permission"
+        android:calendarViewShown="false"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
+        android:splitMotionEvents="true"
+        android:spinnersShown="true"
+        android:soundEffectsEnabled="true"
+        android:datePickerMode="spinner"
+        android:layout_marginLeft="70dp"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="horizontal">
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/time_from"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:id="@+id/from"
+            android:onClick="showTime"
+
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/button4"
+           android:layout_marginStart="30dp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/time_to"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:onClick="showTime"
+            android:id="@+id/to"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentRight="true" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:scrollbars="vertical"
+            android:padding="15dp"
+            android:hint="@string/remarks"
+            android:layout_marginStart="20dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:id="@+id/remark"
+            android:textColor="#333"
+            android:textColorHint="#666"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:text="@string/submit"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+
+        android:layout_marginLeft="80dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_marginTop="29dp"
+        android:id="@+id/send_per" />
+</LinearLayout>
+</ScrollView>
+    <!--  -->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:focusable="true"-->
+    <!--android:focusableInTouchMode="true"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->

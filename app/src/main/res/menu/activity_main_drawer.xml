@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/nav_vacation"
+            android:icon="@drawable/ic_vacation"
+            android:title="@string/vacation" />
+        <item
+            android:id="@+id/nav_permission"
+            android:icon="@drawable/ic_permission_24dp"
+            android:title="@string/permission" />
+        <item
+            android:id="@+id/nav_mission"
+            android:icon="@drawable/ic_work_black_24dp"
+            android:title="@string/mission" />
+        <item
+            android:id="@+id/nav_compensation"
+            android:icon="@drawable/ic_work_black_24dp"
+            android:title="@string/com_days" />
+
+        <item
+            android:id="@+id/extension"
+            android:title="@string/extension"
+            android:icon="@drawable/ic_local_phone_black_24dp"
+            />
+
+
+        <item
+            android:id="@+id/Log_out"
+            android:icon="@drawable/ic_backspace_black_24dp"
+            android:title="Logout" />
+    </group>
+
+
+
+</menu>

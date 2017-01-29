@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="eg.intercom.hrss.activities.CompensationDaysActivity">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_vacation"
+            android:icon="@drawable/ic_vacation"
+            android:title="Vacations" />
+        <item
+            android:id="@+id/nav_permission"
+            android:icon="@drawable/ic_permission_24dp"
+            android:title="Permission" />
+        <item
+            android:id="@+id/nav_mission"
+            android:icon="@drawable/ic_work_black_24dp"
+            android:title="Missions" />
+        <item
+            android:id="@+id/nav_compensation"
+            android:icon="@drawable/ic_work_black_24dp"
+            android:title="Compensation Days" />
+        <item
+            android:id="@+id/Log_out"
+            android:icon="@drawable/ic_backspace_black_24dp"
+            android:title="LogOut" />
+    </group>
+
+    <item android:title="Statistics" >
+        <menu>
+            <item
+                android:id="@+id/extension"
+                android:title="Extention Numbers"
+                android:icon="@drawable/ic_local_phone_black_24dp"
+                />
+
+            <item
+                android:id="@+id/nav_report"
+                android:icon="@drawable/ic_subject_black_24dp"
+                android:title="Reports" />
+            <item
+                android:id="@+id/nav_person"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Profile" />
+        </menu>
+    </item>
+</menu>

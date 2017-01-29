@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HRSS</string>
+    <string name="general_error">General_error</string>
+    <string name="title_activity_login">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="Loading">...</string>
+    <string name="remain">remaining</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="about_libraries">Libraries:</string>
+    <string name="other_person">Other user</string>
+    <string name="save_pass">Remember me</string>
+
+  <string name="about_robototextview">RobotoTextView by Evgeny
+  Shishkin</string>
+    <string name="about_msg_subject">[NavigationDrawerSI]</string>
+    <string name="about_mail_chooser">Send with</string>
+  <string name="about_intent_failed">The requested application
+  could not be launched.</string>
+    <!--Login Activity-->
+    <string name="loginButton">Login</string>
+    <string name="username">Enter your Intercom user name</string>
+    <string name="password">Enter your Intercom password</string>
+  <string name="login_message_failed">Try Again or Call
+  Administrator</string>
+  <string name="login_message_null_or_empty">Please Enter Valid
+  User name and Password</string>
+  <string name="invalid_user_or_pass">Invalid Username or
+  Password</string>
+    <string name="on_vacation_today">On Vacation Today</string>
+    <string name="on_vacation_tomorrow">On Vacation Tomorrow</string>
+    <string name="zero_value">0</string>
+    <string name="pending_request">Pending Requests</string>
+    <string name="Submit">Submit</string>
+  <string name="AvailableVacationBalance">Available Vacation
+  Balance</string>
+    <string name="Description">Description</string>
+    <!--compensation req params-->
+    <string name="com_param_date">dateTime</string>
+    <string name="com_param_emp_name">employeeName</string>
+    <string name="com_param_man_code">managerCode</string>
+    <string name="com_param_man_name">managerName</string>
+    <string name="com_param_remarks">remarks</string>
+    <string name="des_required">Description is required</string>
+    <string name="required_from_date">Start date is required</string>
+    <string name="required_to_date">End date is required</string>
+    <string name="remark_required">Remarks is required</string>
+    <string name="date_required">Dates are required</string>
+    <string name="date_overlap">Dates are not valid!</string>
+
+  <string name="disabled_vac_type">Unpaid and Sick Vacation Types
+  will Enabled Soon</string>
+  <string name="something_wrong">Something went wrong at server
+  end</string>
+  <string name="com_req_successfully">Request Sent
+  Successfully</string>
+    <string name="not_holiday">Not Holiday</string>
+    <string name="holiday">Choose Work Days, Not Holidays</string>
+  <string name="prev_vac">Request already exists in the given date
+  interval!</string>
+  <string name="MORE_THAN_ONE_HOUR_FOR_NURSING">Only 4 hours is
+  permitted for this request type.</string>
+  <string name="MORE_THAN_ONE_NURSING_PERMISSION_IN_ONE_DAY">
+  Request Denied. You exceeded the limit.</string>
+  <string name="START_DATE_EQUAL_END_DATE">Request Denied. Start
+  Date/Time and End Date/Time should not be equal.</string>
+  <string name="PERMISSION_WITHIN_WORK_TIME">You should apply for a
+  permission not less than 15 minutes and within the working
+  hours.</string>
+  <string name="PREV_PERMISSION">Request Denied. Another permission
+  request already exists during the same period.</string>
+  <string name="PREV_WorkMISSION">Request Denied. Another work
+  mission request already exists during the same period.</string>
+    <string name="use_expansion_animation">Use Expansion Animation</string>
+    <string name="show_normal_sliding_activity">Show Normal Sliding Activity</string>
+    <string name="show_normal_sliding_activity_fullscreen">Show Normal Sliding Activity (Fullscreen)</string>
+    <string name="show_menu_item_activity">Show Menu Item Sliding Activity</string>
+    <string name="show_image_activity">Show Image Sliding Activity</string>
+    <string name="show_dark_activity">Show Dark Sliding Activity</string>
+    <string name="show_fab_activity">Show FAB Sliding Activity</string>
+    <string name="show_no_header_activity">Show No Header Sliding Activity</string>
+    <string name="show_custom_header_activity">Show Custom Header Sliding Activity</string>
+    <string name="show_talon_activity">Show Talon for Twitter Example</string>
+
+    <string name="bug">Bug Report</string>
+
+    <string name="normal_sliding_activity">Normal Sliding Activity</string>
+    <string name="custom_sliding_activity">Custom Header Activitiy</string>
+    <string name="submit_feedback">Submit Feedback</string>
+    <string name="image_activity">Image Activity</string>
+    <string name="dark_activity">Dark Activity</string>
+    <string name="vac_activity">Vacations</string>
+    <string name="miss_activity">Missions</string>
+    <string name="per_activity">Permission</string>
+    <string name="com_activity">Compensation Days</string>
+
+    <string name="talon_activity">Jacob Klinker</string>
+
+    <string name="title_activity_main">Home</string>
+    <string-array name="vac_type">
+        <item>Annual Leave</item>
+        <item>Pilgrimage Leave</item>
+        <item>Death Leave</item>
+        <item>Military</item>
+        <item>Marriage Leave</item>
+        <item>Emergency sickness</item>
+        <item>Study Leave</item>
+
+    </string-array>
+    <string-array name="type_2">
+
+        <item>Normal</item>
+        <item>Casual</item>
+        <item>Rest Earned</item>
+    </string-array>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="next">Next</string>
+    <string name="showcase_fragment_message">Click the button if you like kittens.</string>
+    <string name="showcase_fragment_title">ShowcaseView and Fragments?</string>
+    <string name="close">Close</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Vacation</string>
+    <string name="annual_leave">Annual leave vacation </string>
+    <string name="title_activity_permission">Permission</string>
+    <string name="title_activity_mission">missions</string>
+    <string name="title_activity_reports">Reports</string>
+    <string name="title_activity_category">Vacation Category</string>
+    <string name="title_activity_manage">Managing</string>
+    <string name="annual">Annual Leave</string>
+    <string name="pilgrimage">Pilgrimage Leave</string>
+    <string name="death">Death Leave</string>
+    <string name="multiple_cat">Multiple mission</string>
+    <string name="partial_cat">Partial mission</string>
+
+    <string name="military">Military Leave</string>
+    <string name="marriage">Marriage Leave</string>
+    <string name="sickness">Emergency Sickness</string>
+    <string name="study">Study Leave</string>
+
+    <string name="title_activity_person">Person</string>
+    <string name="title_activity_multiple">Multiple mission</string>
+    <string name="title_activity_partial">Partial mission</string>
+    <string name="title_activity_compensation_days">Compensation days</string>
+    <string name="title_activity_mission_category">Mission category</string>
+    <string name="login_name">Login Form</string>
+    <string name="paid">Paid vacation type</string>
+    <string name="paid_request">Paid vacation request</string>
+    <string name="date_start">Start Date</string>
+    <string name="date_end">End Date</string>
+    <string name="emp_code">Employee code</string>
+    <string name="ar_name">Arabic name</string>
+    <string name="en_name">English name</string>
+    <string name="ar_short">Arabic short name</string>
+    <string name="en_short">English short name</string>
+    <string name="birth">Birth date</string>
+    <string name="job_title">Job title</string>
+    <string name="hiring">Hiring date</string>
+    <string name="mng_name">Direct manager</string>
+    <string name="dpt_name">Department</string>
+    <string name="ext_num">Extension number</string>
+    <string name="mob1">First mobile number</string>
+    <string name="mob2">Second mobile number</string>
+    <string name="w_email">Work e-mail</string>
+    <string name="p_email">Personal e-mail</string>
+    <string name="home_phone">Home phone number</string>
+    <string name="social_status">Social status</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="postal_code">Postal code</string>
+    <string name="address">Address</string>
+    <string name="half_day">Half day request</string>
+    <string name="validate">CHECK</string>
+    <string name="submit">SEND</string>
+    <string name="new_permission">New permission</string>
+    <string name="multiple">Multiple</string>
+    <string name="partial">Partial</string>
+    <string name="mission_request">New mission request</string>
+    <string name="multiple_request">New multiple mission request</string>
+    <string name="partial_request">New partial mission request</string>
+
+    <string name="time_to">To</string>
+    <string name="time_from">From</string>
+    <string name="mission_type">Mission Type</string>
+    <string name="mission_comment">Please tell us where are you go ..</string>
+    <string name="com_description">Compensation description</string>
+    <string name="com_date">Compensation Date</string>
+    <string name="emp_name">Please, enter your name</string>
+    <string name="permission_request">New Permission Request</string>
+    <string name="end_date_time">End Date / Time</string>
+    <string name="start_date_time">Start Date / Time</string>
+    <string name="remarks">Please enter your remarks here ..</string>
+    <string name="home">Home</string>
+    <string name="vacation">Vacations</string>
+    <string name="permission">Permissions</string>
+    <string name="mission">Missions</string>
+    <string name="com_days">Compensation Days</string>
+    <string name="extension">Extension Numbers</string>
+    <string name="reports">Reports</string>
+    <string name="new_com">New Compensation</string>
+    <string name="placeholder">Lorem ipsum dolor sit amet,</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
+    <string name="basic_del">Delete</string>
+    <string name="str_orange">#47fe26</string>
+    <string name="str_green">#3cac69</string>
+    <string name="str_red">#FF4444</string>
+    <string name="str_yellow">#FFBB33</string>
+    <string name="str_sky_blue">#33B5E5</string>
+    <string name="title_activity_test">TestActivity</string>
+
+
+
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"  android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <DatePicker
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/datePicker_new_compensation"
+            android:calendarViewShown="false"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:splitMotionEvents="true"
+            android:spinnersShown="true"
+            android:soundEffectsEnabled="true"
+            android:datePickerMode="spinner"
+            android:layout_marginLeft="70dp"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
+
+
+    <TextView
+        android:text="@string/com_description"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:id="@+id/textView8"
+
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="26dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:scrollbars="vertical"
+            android:padding="15dp"
+            android:hint="@string/emp_name"
+            android:layout_marginStart="40dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:id="@+id/comp_remark"
+            android:textColor="#333"
+            android:textColorHint="#666"
+          />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:text="@string/submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/comp_send"
+        android:layout_alignParentBottom="true"
+        android:textAppearance="?android:textAppearanceLarge"
+
+        android:layout_centerHorizontal="true" />
+</LinearLayout>
+</ScrollView>

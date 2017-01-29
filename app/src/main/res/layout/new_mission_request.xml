@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView android:orientation="vertical"   android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linearLayout7"
+                android:weightSum="1">
+                <Button
+                    android:id="@+id/partial_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_btn_right"
+                    android:text="@string/partial"
+                    android:textColor="@drawable/selector_buttons_text"
+                    android:layout_weight="0.5" />
+
+                <Button
+                    android:id="@+id/multiple_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@drawable/selector_buttons_text"
+                    android:text="@string/multiple"
+                    android:background="@drawable/selector_btn_left"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:text="@string/date_end"
+                    android:layout_width="230dp"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:layout_height="wrap_content"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    android:onClick="showDate"
+                    android:padding="10dp"
+
+                    android:id="@+id/toDate"
+                    android:layout_below="@+id/fromDate"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp" />
+
+                <Button
+                    android:text="@string/date_start"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    android:padding="10dp"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:id="@+id/fromDate"
+                    android:onClick="showDate"
+
+                    android:layout_marginTop="39dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <DatePicker
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datePicker_new_mission"
+                    android:calendarViewShown="false"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:splitMotionEvents="true"
+                    android:spinnersShown="true"
+                    android:soundEffectsEnabled="true"
+                    android:datePickerMode="spinner"
+                    android:layout_marginLeft="70dp"
+                    android:layout_gravity="center"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_rel"
+                >
+                <Button
+                android:text="@string/time_from"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:padding="10dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:layout_marginTop="3dp"
+                android:id="@+id/from"
+                android:onClick="showTime"
+
+                android:layout_toLeftOf="@+id/to" />
+
+                <Button
+                    android:text="@string/time_to"
+                    android:layout_width="120dp"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:layout_height="wrap_content"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+
+                    android:layout_marginStart="10dp"
+                    android:onClick="showTime"
+                    android:padding="10dp"
+
+                    android:id="@+id/to"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="35dp" />
+            </RelativeLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+                <EditText
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:scrollbars="vertical"
+                    android:padding="15dp"
+                    android:layout_below="@+id/time_rel"
+                    android:hint="@string/mission_comment"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:id="@+id/mis_remark"
+                    android:textColor="#333"
+                    android:textColorHint="#666"
+                    android:textSize="20sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:text="@string/submit"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+
+                android:layout_marginLeft="80dp"
+                android:id="@+id/mis_send"
+                android:padding="10dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="34dp" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
