@@ -27,12 +27,26 @@ import static android.R.attr.id;
  */
 
 
+
 public class ExtensionNumbActivity extends AppCompatActivity {
+    public void gethide(){
+
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
     ListView LV;
     EditText et;
     ArrayAdapter<String> adapter;
-    ArrayList<HashMap<String, String>> list;
-    String[] extension = {
+    ArrayList<HashMap<String,String>> list;
+    String [] extension = {
             "10	      \t\t\t\t\t\t  Ahmed Khedr",
             "101      \t\t\t\t\t\t  Sally ElKady",
             "102      \t\t\t\t\t\t  Mamdouh Abo Ghanima",
@@ -164,29 +178,14 @@ public class ExtensionNumbActivity extends AppCompatActivity {
             "431	  \t\t\t\t\t\t\t  Neveen ElBadrawy", "432      \t\t\t\t\t\t  Ali Badr", "435	  \t\t\t\t\t\t\t  Osama Abbas", "437      \t\t\t\t\t\t  Haitham Salah", "445      \t\t\t\t\t\t  Ayman Saeed",
             "446	  \t\t\t\t\t\t\t  Shereen Elmahdy", "447      \t\t\t\t\t\t  Sami Ayman", "448	  \t\t\t\t\t\t\t  Kareem Nader", "449	  \t\t\t\t\t\t\t  Ahmed Ateya",
             "450	  \t\t\t\t\t\t\t  Yasser Fathy Zaki Herez", "451	  \t\t\t\t\t\t\t  Sherif El Khoriby", "50	      \t\t\t\t\t\t  Samy Zakareya", "501	  \t\t\t\t\t\t\t  Marwan Sultan",
-            "502	  \t\t\t\t\t\t\t  Waleed Sultan", "503	  \t\t\t\t\t\t\t  Waleed Sultan II", "505	  \t\t\t\t\t\t\t  Ahmed Salah", "507	  \t\t\t\t\t\t\t  Mohammed Said", "510	  \t\t\t\t\t\t\t  Hisham Fathi", "512	  \t\t\t\t\t\t\t  Mohamed Saleh", "514      \t\t\t\t\t\t  Hany ElKholy", "516	  \t\t\t\t\t\t\t  Meeting Room 5th Floor", "517	  \t\t\t\t\t\t\t  Fayrouz Aziz", "518	  \t\t\t\t\t\t\t  518", "519	  \t\t\t\t\t\t\t  519",
+            "502	  \t\t\t\t\t\t\t  Waleed Sultan", "503	  \t\t\t\t\t\t\t  Waleed Sultan II", "505	  \t\t\t\t\t\t\t  Ahmed Salah","507	  \t\t\t\t\t\t\t  Mohammed Said", "510	  \t\t\t\t\t\t\t  Hisham Fathi", "512	  \t\t\t\t\t\t\t  Mohamed Saleh", "514      \t\t\t\t\t\t  Hany ElKholy", "516	  \t\t\t\t\t\t\t  Meeting Room 5th Floor", "517	  \t\t\t\t\t\t\t  Fayrouz Aziz", "518	  \t\t\t\t\t\t\t  518", "519	  \t\t\t\t\t\t\t  519",
             "520	  \t\t\t\t\t\t\t  Ahmed AlGezawy", "522	  \t\t\t\t\t\t\t  522", "525	  \t\t\t\t\t\t\t  Mai Ziad", "526	  \t\t\t\t\t\t\t  Ahmed Ramdan",
-            "527	  \t\t\t\t\t\t\t  Banking", "534	  \t\t\t\t\t\t\t  Amr Afifi", "535	  \t\t\t\t\t\t\t  Marwan Sultan II", "536	  \t\t\t\t\t\t\t  Omar ELBialy", "60	      \t\t\t\t\t\t  Abdo Mohamed", "603	  \t\t\t\t\t\t\t  Mostafa Aly", "604	  \t\t\t\t\t\t\t  604",
+            "527	  \t\t\t\t\t\t\t  Banking", "534	  \t\t\t\t\t\t\t  Amr Afifi", "535	  \t\t\t\t\t\t\t  Marwan Sultan II", "536	  \t\t\t\t\t\t\t  Omar ELBialy", "60	      \t\t\t\t\t\t  Abdo Mohamed","603	  \t\t\t\t\t\t\t  Mostafa Aly", "604	  \t\t\t\t\t\t\t  604",
             "605	  \t\t\t\t\t\t\t  Nour Yasser", "607	  \t\t\t\t\t\t\t  Mohamed Alaa ElDen", "608	  \t\t\t\t\t\t\t  Mohamed Alaa", "609	  \t\t\t\t\t\t\t  Fatma Al-Zahraa", "610	  \t\t\t\t\t\t\t  Mohamed Essam", "611	  \t\t\t\t\t\t\t  Hussien Fawaz", "612	  \t\t\t\t\t\t\t  Abdel Monem Abdel Azeem", "613	  \t\t\t\t\t\t\t  Alaa Abdel moneim",
             "614	  \t\t\t\t\t\t\t  Mohamed Ashour", "615	  \t\t\t\t\t\t\t  Abeer Assim", "616      \t\t\t\t\t\t  Mokhtar Mahmoud", "617      \t\t\t\t\t\t  Andrew Atef",
             "618	  \t\t\t\t\t\t\t  Ismail Baseouni", "619	  \t\t\t\t\t\t\t  Ayman Mokhtar", "622	  \t\t\t\t\t\t\t  Ahmed Zedan", "623	  \t\t\t\t\t\t\t  Support", "624      \t\t\t\t\t\t  Mohamed Emam", "625	  \t\t\t\t\t\t\t  Hany Mohamed",
             "626	  \t\t\t\t\t\t\t  Ahmed Mossallam", "627	  \t\t\t\t\t\t\t  Ahmed Youssef", "628	  \t\t\t\t\t\t\t  Mahmoud Amin", "630	  \t\t\t\t\t\t\t  Meeting Room 6th Floor", "632	  \t\t\t\t\t\t\t  Mohamed Atef", "633	  \t\t\t\t\t\t\t  Omnia Fekry", "634	  \t\t\t\t\t\t\t  Moataz Nabil"
     };
-
-    public void gethide() {
-
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.
-                INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.
-                INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        return true;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -205,12 +204,12 @@ public class ExtensionNumbActivity extends AppCompatActivity {
 
                     return true;
                 }
-                gethide();
+               gethide();
                 return false;
             }
 
-        });
-        adapter = new ArrayAdapter<String>(this, R.layout.item_list, R.id.item, extension);
+    });
+        adapter  = new ArrayAdapter<String>(this, R.layout.item_list,R.id.item, extension);
         LV.setAdapter(adapter);
 
 

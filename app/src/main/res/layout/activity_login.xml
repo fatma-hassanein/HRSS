@@ -37,9 +37,9 @@
                     android:src="@drawable/profile"
                     app:civ_border_width="3dp"
                     app:civ_border_color="#FFF"
-                    android:layout_marginEnd="111dp"
+                    android:layout_marginRight="111dp"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                      />
 
             </RelativeLayout>
@@ -54,7 +54,7 @@
                     android:layout_height="50dp"
                     android:text="@string/other_person"
                     android:gravity="center"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     />
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -67,44 +67,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
-                    android:fontFamily="casual"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                     />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
+                app:passwordToggleEnabled="true"
                 android:layout_height="wrap_content">
-                <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/password"
-                    android:hint="Password"
-                    />
+                <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                />
 
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_user_navigation_drawer"
                 android:textColor="@color/white"
-                android:fontFamily="casual"
                 android:layout_marginTop="16dp"
+
                 android:text="@string/action_sign_in_short"
                 android:textStyle="bold" />
             </LinearLayout>
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/save_pass"
                 android:id="@+id/remember_Me"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 />
 <RelativeLayout
                 android:layout_width="match_parent"
@@ -121,8 +126,8 @@
                     app:civ_border_color="#FFF"
                     android:layout_gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="12dp" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,12 +135,12 @@
                     android:text="@string/other_person"
                     android:gravity="center"
 
-                    android:textSize="20dp"
+                    android:textSize="20sp"
 
                     android:id="@+id/other"
-                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/other_user_profile" />
+                    android:layout_toRightOf="@+id/other_user_profile" />
 
 
             </RelativeLayout>
@@ -152,15 +157,23 @@
         android:visibility="gone" />
 
 </LinearLayout>
-<!--<EditText-->
-<!--android:id="@+id/password"-->
+    <!--<EditText-->
+    <!--android:id="@+id/password"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/prompt_password"-->
+    <!--android:imeActionId="@+id/login"-->
+    <!--android:imeActionLabel="@string/action_sign_in_short"-->
+    <!--android:imeOptions="actionUnspecified"-->
+    <!--android:inputType="textPassword"-->
+    <!--android:fontFamily="casual"-->
+    <!--android:maxLines="1"-->
+    <!--android:singleLine="true" />-->
+
+<!--<com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText-->
 <!--android:layout_width="match_parent"-->
 <!--android:layout_height="wrap_content"-->
-<!--android:hint="@string/prompt_password"-->
-<!--android:imeActionId="@+id/login"-->
-<!--android:imeActionLabel="@string/action_sign_in_short"-->
-<!--android:imeOptions="actionUnspecified"-->
-<!--android:inputType="textPassword"-->
-<!--android:fontFamily="casual"-->
-<!--android:maxLines="1"-->
-<!--android:singleLine="true" />-->
+<!--android:id="@+id/password"-->
+
+<!--android:hint="Password"-->
+    <!--/>-->

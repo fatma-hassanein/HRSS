@@ -1,15 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="eg.intercom.hrss.activities.MissionActivity">
+    tools:context="eg.intercom.hrss.activities.CompensationDaysActivity">
 
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/comp_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="fill"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    <!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp">-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+        <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:theme="@style/AppTheme.AppBarOverlay">-->
 
-</RelativeLayout>
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/com_toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="160dp"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+
+        <!--</android.support.design.widget.AppBarLayout>-->
+    <!--</LinearLayout>-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/com_fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="114dp"-->
+        <!--android:layout_marginLeft="260dp"-->
+
+        <!--app:srcCompat="@android:drawable/ic_input_add" />-->
+<!--</FrameLayout>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comp_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+         >
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
