@@ -29,9 +29,9 @@ import eg.intercom.hrss.api.ResultPendingRequest;
 
 
 public class ListAdapter extends BaseAdapter {
-    Activity activity;
+   // Activity activity;
     Context mContext;
-    String TAG = "ManageActivity Test";
+   // String TAG = "ManageActivity Test";
 
     ArrayList<PendingRequestModel> requests;
 
@@ -99,26 +99,30 @@ public class ListAdapter extends BaseAdapter {
         String test = separated[0];
 //        String last = separated[separated.length-1];
         empEnName = test+" ";
-        holder.name.setText(empEnName+"requested a new mission");
+        //holder.name.setText(empEnName+"requested a new mission");
         holder.startDate.setText(requests.get(position).getStartDate());
         holder.endDate.setText(requests.get(position).getEndDate());
 
 if(requests.get(position).getRequestType().equalsIgnoreCase("m")){
 //    holder.listItem.setBackgroundColor(Color.parseColor("#e0e595"));
 //    convertView.setBackgroundColor();
+    holder.name.setText(empEnName+"requested a new Mission");
     holder.req_typ.setImageResource(R.drawable.mis_image);
 }else if(requests.get(position).getRequestType().equalsIgnoreCase("p")){
 //    holder.background.setBackgroundColor(Color.parseColor("#488ea0"));
+    holder.name.setText(empEnName+"requested a new Permission");
     holder.req_typ.setImageResource(R.drawable.per_image);
 
 //    holder.listItem.setBackgroundColor(Color.parseColor("#d0e1e5"));
 }else if(requests.get(position).getRequestType().equalsIgnoreCase("c")){
 //    holder.listItem.setBackgroundColor(Color.parseColor("#e8aed6"));
+    holder.name.setText(empEnName+"requested a new Compensation");
     holder.req_typ.setImageResource(R.drawable.com_image);
 
 //    convertView.setBackgroundColor(Color.parseColor("#a04886"));
         }else if(requests.get(position).getRequestType().equalsIgnoreCase("v")){
 //    holder.listItem.setBackgroundColor(Color.parseColor("#ed9393"));
+    holder.name.setText(empEnName+"requested a new Vacation");
     holder.req_typ.setImageResource(R.drawable.vac_image);
 
 //    convertView.setBackgroundColor(Color.parseColor("#a04848"));

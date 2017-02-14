@@ -37,7 +37,6 @@ public class CompensationDaysActivity extends SlidingActivity implements APIList
     String TAG = "CompensationHistory";
     private RecyclerView.LayoutManager layoutManager;
     private CompensationAdapter compAdapter;
-    //	public LstMisReq lstMisReq;
     private ArrayList<CompensationHistoryResults> compResults;
     private ArrayList<LstCompHst> compList;
     @Override
@@ -53,6 +52,7 @@ public class CompensationDaysActivity extends SlidingActivity implements APIList
                 getResources().getColor(R.color.fab_activity_primary_dark)
         );
         setContent(R.layout.activity_compensation_days);
+
         setFab(
                 getResources().getColor(R.color.fab_activity_accent),
                 R.drawable.add,

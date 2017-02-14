@@ -36,7 +36,6 @@ public class PermissionActivity extends SlidingActivity implements APIListener {
     String TAG = "PermissionHistory";
     private RecyclerView.LayoutManager layoutManager;
     private PermissionAdapter perAdapter;
-    //	public LstMisReq lstMisReq;
     private ArrayList<PermissionHistoryResults> perResults;
     private ArrayList<LstPerHst> perList;
 

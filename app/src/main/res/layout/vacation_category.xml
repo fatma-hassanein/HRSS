@@ -1,86 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout android:orientation="vertical" android:layout_width="match_parent"
-    android:weightSum="4" xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4">
 
     <TextView
+        android:id="@+id/annual"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/annual"
-        android:id="@+id/annual"
-        android:scaleType="fitXY"
         android:layout_weight="1"
-
-        android:gravity="center"
-        android:textSize="40sp"
         android:background="#e55b5b"
-        />
-
-
-
-
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/annual"
+        android:textSize="40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
         android:layout_weight="1"
+        android:orientation="horizontal"
+        android:scaleType="fitXY">
 
-        android:scaleType="fitXY"
-
-        >
         <LinearLayout
+            android:id="@+id/plig_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-            android:id="@+id/plig_lay"
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#5fe85a"
+                android:src="@drawable/ic_pilgrimage" />
 
-                android:src="@drawable/ic_pilgrimage"/>
             <TextView
+                android:id="@+id/plig"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#5fe85a"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/pilgrimage"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#5fe85a"
-                android:id="@+id/plig" />
+                android:textSize="20sp" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/death_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-            android:id="@+id/death_lay"
-
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#0caf07"
+                android:src="@drawable/death" />
 
-                android:src="@drawable/death"/>
             <TextView
+                android:id="@+id/death"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#0caf07"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/death"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#0caf07"
-                android:id="@+id/death" />
+                android:textSize="20sp" />
         </LinearLayout>
 
 
@@ -89,135 +76,114 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:scaleType="fitXY"
         android:layout_weight="1"
-
-        >
+        android:orientation="horizontal"
+        android:scaleType="fitXY">
 
         <LinearLayout
+            android:id="@+id/mili_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-            android:id="@+id/mili_lay"
-
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#ea7507"
+                android:src="@drawable/military" />
 
-                android:src="@drawable/military"/>
             <TextView
+                android:id="@+id/military"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#ea7507"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/military"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#ea7507"
-                android:id="@+id/military" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/mar_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-
-            android:id="@+id/mar_lay"
-
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#af5807"
+                android:src="@drawable/marriage" />
 
-                android:src="@drawable/marriage"/>
             <TextView
+                android:id="@+id/marriage"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#af5807"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/marriage"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#af5807"
-                android:id="@+id/marriage" />
+                android:textSize="20sp" />
         </LinearLayout>
-
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:scaleType="fitXY"
-
         android:layout_weight="1"
-        >
+        android:orientation="horizontal"
+        android:scaleType="fitXY">
 
         <LinearLayout
+            android:id="@+id/sick_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/sick_lay"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#1980c4"
+                android:src="@drawable/sick" />
 
-                android:src="@drawable/sick"/>
             <TextView
+                android:id="@+id/sickness"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#1980c4"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/sickness"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#1980c4"
-                android:id="@+id/sickness" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/stu_lay"
             android:layout_width="190dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/stu_lay"
-            android:scaleType="fitXY"
+            android:scaleType="fitXY">
 
-
-            >
             <ImageView
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:background="#1922c4"
+                android:src="@drawable/study" />
 
-                android:src="@drawable/study"/>
             <TextView
+                android:id="@+id/study"
                 android:layout_width="190dp"
                 android:layout_height="50dp"
-
+                android:background="#1922c4"
+                android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/study"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="#1922c4"
-                android:id="@+id/study" />
+                android:textSize="20sp" />
         </LinearLayout>
-
 
     </LinearLayout>
 </LinearLayout>
-
-

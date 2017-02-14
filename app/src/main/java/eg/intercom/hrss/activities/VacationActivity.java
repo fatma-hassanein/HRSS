@@ -37,7 +37,6 @@ public class VacationActivity extends SlidingActivity implements APIListener {
 
     String TAG = "VacationHistory";
     private VacationAdapter vacAdapter;
-    //	public LstMisReq lstMisReq;
     private ArrayList<VacationHistoryResults> vacResults;
     private ArrayList<LstVacHst> vacList;
     @Override
@@ -118,7 +117,6 @@ public class VacationActivity extends SlidingActivity implements APIListener {
             Utility.removeProgressDialog();
         eg.intercom.hrss.helpers.Log.e("person Response in main", response + "gg");
         try {
-//			results = new LstMisReq();
             VacationHistoryResults vacationHistoryResults = new VacationHistoryResults();
             Gson gson = new Gson();
 
