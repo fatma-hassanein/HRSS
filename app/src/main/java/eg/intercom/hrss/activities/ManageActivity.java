@@ -2,7 +2,6 @@ package eg.intercom.hrss.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,30 +9,18 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import eg.intercom.hrss.R;
 import eg.intercom.hrss.api.APIListener;
-import eg.intercom.hrss.api.LstCompReq;
-import eg.intercom.hrss.api.LstMisReq;
-import eg.intercom.hrss.api.LstPerReq;
-import eg.intercom.hrss.api.LstVacReq;
 import eg.intercom.hrss.api.PendingRequestModel;
-import eg.intercom.hrss.api.ProfileResults;
 import eg.intercom.hrss.api.ResultPendingRequest;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -94,7 +81,7 @@ public class ManageActivity extends AppCompatActivity implements APIListener {
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
         new RetrofitAsynTask(0, ServerConfig.PENDING_REQUEST, ServerConfig.METHOD_GET, mRetrofitHeader, null
                 , this, this).execute();

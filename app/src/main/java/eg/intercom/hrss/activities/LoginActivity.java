@@ -13,12 +13,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +41,7 @@ import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Log;
 import eg.intercom.hrss.helpers.MyApplication;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -57,7 +56,7 @@ public class LoginActivity extends Activity implements APIListener {
     CircleImageView person, otherPerson;
     TextView EMpName,other;
     TextInputLayout user;
-    CheckBox remember;
+    AppCompatCheckBox remember;
     public JSONObject resultObject = null;
     SharedPreferences passSharedPrefs;
     SharedPreferences.Editor editPassShared;
@@ -65,7 +64,7 @@ public class LoginActivity extends Activity implements APIListener {
     Context mContext;
     Bitmap decodedByte;
     private EditText mUserView;
-    private ShowHidePasswordEditText mPasswordView;
+    private EditText mPasswordView;
     private View mProgressView, mLoginFormView;
 
     @Override
@@ -97,9 +96,9 @@ public class LoginActivity extends Activity implements APIListener {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mContext = this;
-        remember = (CheckBox) findViewById(R.id.remember_Me);
+        remember = (AppCompatCheckBox) findViewById(R.id.remember_Me);
         mUserView = (EditText) findViewById(R.id.email);
-
+       mUserView.setTypeface(Utility.applyCustomFonts("Roboto-Thin.ttf",mContext));
 
         loginLayout = (LinearLayout) findViewById(R.id.parent);
 
@@ -116,8 +115,11 @@ public class LoginActivity extends Activity implements APIListener {
 
         person.setImageBitmap(decodedByte);
         EMpName = (TextView) findViewById(R.id.other_person);
-        mPasswordView = (ShowHidePasswordEditText) findViewById(R.id.password);
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.setTypeface(Utility.applyCustomFonts("Roboto-Thin.ttf",mContext));
+
         EMpName.setText(R.string.other_person);
+       EMpName.setTypeface(Utility.applyCustomFonts("Roboto-Thin.ttf",mContext));
 // TODO I will check this later .....................
 //        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
@@ -149,7 +151,8 @@ public class LoginActivity extends Activity implements APIListener {
 //            remember.setChecked(false);
 //
 //        }
-        Button mLogInButton = (Button) findViewById(R.id.email_sign_in_button);
+        AppCompatButton mLogInButton = (AppCompatButton) findViewById(R.id.email_sign_in_button);
+        mLogInButton.setTypeface(Utility.applyCustomFonts("Roboto-Thin.ttf",mContext));
         mLogInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +177,7 @@ public class LoginActivity extends Activity implements APIListener {
                                         Snackbar.make(loginLayout, "You are connected now", Snackbar.LENGTH_SHORT).show();
 
                                     } else {
-                                        Snackbar.make(loginLayout, "You arenot connected now", Snackbar.LENGTH_SHORT).show();
+                                        Snackbar.make(loginLayout, "You are not connected now", Snackbar.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -189,6 +192,8 @@ public class LoginActivity extends Activity implements APIListener {
             }
         });
         other = (TextView) findViewById(R.id.other);
+        other.setTypeface(Utility.applyCustomFonts("Roboto-Thin.ttf",mContext));
+
         other.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -339,6 +344,8 @@ public class LoginActivity extends Activity implements APIListener {
                     Log.e("1111111111111111111111Token:: ", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN, mContext));
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
+
+
                     i.putExtra("in", Signin);
                     i.putExtra("out", Signout);
                     finish();
@@ -381,7 +388,7 @@ public class LoginActivity extends Activity implements APIListener {
         mRetrofitParams.put("password", mPasswordView.getText().toString());
         Constants.httpClient = new OkHttpClient.Builder();
         Map<String, String> mHeader = new HashMap<>();
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mHeader, mContext));
         new RetrofitAsynTask(0, ServerConfig.LOGIN_PATH, ServerConfig.METHOD_POST, null, mRetrofitParams
                 , this, this).execute();
 

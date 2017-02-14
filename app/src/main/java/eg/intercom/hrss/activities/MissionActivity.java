@@ -3,7 +3,6 @@ package eg.intercom.hrss.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,14 +11,13 @@ import android.view.View;
 import eg.intercom.hrss.R;
 import eg.intercom.hrss.activities.add.NewMissionActivity;
 import eg.intercom.hrss.adapters.MissionAdapter;
-import eg.intercom.hrss.adapters.ViewPagerAdapter;
 import eg.intercom.hrss.api.APIListener;
 import eg.intercom.hrss.api.LstMisHst;
 import eg.intercom.hrss.api.MissionHistoryResults;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -37,6 +35,7 @@ public class MissionActivity extends SlidingActivity implements APIListener {
     String TAG = "PermissionHistory";
     private RecyclerView.LayoutManager layoutManager;
     private MissionAdapter misAdapter;
+    //	public LstMisReq lstMisReq;
     private ArrayList<MissionHistoryResults> misResults;
     private ArrayList<LstMisHst> misList;
     @Override
@@ -48,29 +47,23 @@ public class MissionActivity extends SlidingActivity implements APIListener {
         misResults = new ArrayList<MissionHistoryResults>();
 
 
+
         setPrimaryColors(
-                getResources().getColor(R.color.fab_activity_primary),
-                getResources().getColor(R.color.fab_activity_primary_dark)
+                getResources().getColor(R.color.mis_activity),
+                getResources().getColor(R.color.mis_activity_dark)
         );
         setContent(R.layout.activity_mission);
-
-         //setHeaderContent(R.layout);
-//        setFab(
-//                getResources().getColor(R.color.fab_activity_accent),
-//                R.drawable.add,
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent i = new Intent(MissionActivity.this,NewMissionActivity.class);
-//                        startActivity(i);
-//                    }
-//                }
-//        );
-
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        setFab(
+                getResources().getColor(R.color.fab_activity_accent),
+                R.drawable.add,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(MissionActivity.this,NewMissionActivity.class);
+                        startActivity(i);
+                    }
+                }
+        );
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra(MainActivity.ARG_USE_EXPANSION, false)) {
@@ -81,10 +74,12 @@ public class MissionActivity extends SlidingActivity implements APIListener {
                     intent.getIntExtra(MainActivity.ARG_EXPANSION_VIEW_HEIGHT, 0)
             );
         }
-       // misHisView = (RecyclerView) findViewById(R.id.mis_list);
-       // getMissionHistoy();
+        misHisView = (RecyclerView) findViewById(R.id.mis_list);
+        getMissionHistoy();
     }
-
+    /**
+     * Created by Yaser on 8/28/2016.
+     */
 
     public void getMissionHistoy() {
 
@@ -110,7 +105,7 @@ public class MissionActivity extends SlidingActivity implements APIListener {
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
         new RetrofitAsynTask(0, ServerConfig.MISSION_HISTORY, ServerConfig.METHOD_GET, mRetrofitHeader, null
                 , this, this).execute();

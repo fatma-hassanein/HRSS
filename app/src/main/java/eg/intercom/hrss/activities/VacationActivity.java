@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 
 import eg.intercom.hrss.R;
+import eg.intercom.hrss.activities.add.NewVacationActivity;
 import eg.intercom.hrss.adapters.VacationAdapter;
 import eg.intercom.hrss.api.APIListener;
 import eg.intercom.hrss.api.LstVacHst;
@@ -17,7 +17,7 @@ import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.api.VacationHistoryResults;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -37,6 +37,7 @@ public class VacationActivity extends SlidingActivity implements APIListener {
 
     String TAG = "VacationHistory";
     private VacationAdapter vacAdapter;
+    //	public LstMisReq lstMisReq;
     private ArrayList<VacationHistoryResults> vacResults;
     private ArrayList<LstVacHst> vacList;
     @Override
@@ -48,8 +49,8 @@ public class VacationActivity extends SlidingActivity implements APIListener {
         vacList = new ArrayList<LstVacHst>();
         vacResults = new ArrayList<VacationHistoryResults>();
         setPrimaryColors(
-                getResources().getColor(R.color.fab_activity_primary),
-                getResources().getColor(R.color.fab_activity_primary_dark)
+                getResources().getColor(R.color.vac_activity),
+                getResources().getColor(R.color.vac_activity_dark)
         );
         setContent(R.layout.activity_vacation);
         setFab(
@@ -58,7 +59,7 @@ public class VacationActivity extends SlidingActivity implements APIListener {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(VacationActivity.this,VacationCategoryActivity.class);
+                        Intent i = new Intent(VacationActivity.this,NewVacationActivity.class);
                         startActivity(i);
                     }
                 }
@@ -104,7 +105,7 @@ public class VacationActivity extends SlidingActivity implements APIListener {
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
         new RetrofitAsynTask(0, ServerConfig.VACATION_HISTORY, ServerConfig.METHOD_GET, mRetrofitHeader, null
                 , this, this).execute();
@@ -117,6 +118,7 @@ public class VacationActivity extends SlidingActivity implements APIListener {
             Utility.removeProgressDialog();
         eg.intercom.hrss.helpers.Log.e("person Response in main", response + "gg");
         try {
+//			results = new LstMisReq();
             VacationHistoryResults vacationHistoryResults = new VacationHistoryResults();
             Gson gson = new Gson();
 

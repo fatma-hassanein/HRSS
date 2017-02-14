@@ -26,7 +26,7 @@ import eg.intercom.hrss.api.PermissionHistoryResults;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -36,6 +36,7 @@ public class PermissionActivity extends SlidingActivity implements APIListener {
     String TAG = "PermissionHistory";
     private RecyclerView.LayoutManager layoutManager;
     private PermissionAdapter perAdapter;
+    //	public LstMisReq lstMisReq;
     private ArrayList<PermissionHistoryResults> perResults;
     private ArrayList<LstPerHst> perList;
 
@@ -50,8 +51,8 @@ public class PermissionActivity extends SlidingActivity implements APIListener {
 
 
         setPrimaryColors(
-                getResources().getColor(R.color.fab_activity_primary),
-                getResources().getColor(R.color.fab_activity_primary_dark)
+                getResources().getColor(R.color.per_activity),
+                getResources().getColor(R.color.per_activity_dark)
         );
         setContent(R.layout.activity_permission);
 
@@ -110,7 +111,7 @@ public class PermissionActivity extends SlidingActivity implements APIListener {
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
         new RetrofitAsynTask(0, ServerConfig.PERMISSION_HISTORY, ServerConfig.METHOD_GET, mRetrofitHeader, null
                 , this, this).execute();

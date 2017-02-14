@@ -26,7 +26,7 @@ import eg.intercom.hrss.api.APIListener;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -282,7 +282,7 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
         Log.e("HeaderToken",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
     Constants.httpClient = new OkHttpClient.Builder();
 
-    Constants.httpClient.addInterceptor(new RerofitInterceptor(mCompensatiionHeader,mContext));
+    Constants.httpClient.addInterceptor(new RetrofitInterceptor(mCompensatiionHeader,mContext));
 
     new RetrofitAsynTask(0, ServerConfig.COMPENSATION_REQUEST, ServerConfig.METHOD_POST,mCompensatiionHeader,mRetrofitParams
             , this, this).execute();

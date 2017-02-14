@@ -29,7 +29,7 @@ import eg.intercom.hrss.api.ProfileResults;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -37,14 +37,14 @@ public class PersonActivity extends SlidingActivity implements APIListener {
 
 //    public  JSONObject jsonObject=null;
 
-   public ProfileResults jsonObject;
-    TextView empCode,arabicName,engName,birthDate,jobTitle,hiringDate,directManager,department,workEmail;
+    public ProfileResults jsonObject;
+    TextView personalEmail,homePhone,empCode,arabicName,engName,birthDate,jobTitle,hiringDate,directManager,department,workEmail,officeExtension,mobile1,mobile2,socialStatus,country,city,postalCode,address;
     CircleImageView profImage;
-    EditText personalEmail,homePhone,socialStatus,country,city,postalCode,address,arabicShort,engShort,officeExtension,mobile1,mobile2;
+    //    EditText arabicShort,engShort;
     Bitmap decodedByte;
     String mProfileImage;
 
-   private Context mContext;
+    private Context mContext;
     @Override
     public void init(Bundle savedInstanceState) {
         setContent(R.layout.activity_person);
@@ -54,9 +54,12 @@ public class PersonActivity extends SlidingActivity implements APIListener {
         mProfileImage = Constants.getDataInSharedPrefrences(Constants.USER_PHOTO, mContext);
         byte[] decodedString = Base64.decode(mProfileImage, Base64.DEFAULT);
         decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        setImage(decodedByte);
+        // setImage(decodedByte);
         Log.e("7777777777777777",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
+        setHeaderContent(R.layout.custom_header_profile);
+        setPrimaryColors(getResources().getColor(R.color.accent_color),
+                getResources().getColor(R.color.background_user_navigation_drawer));
 
         empCode = (TextView)findViewById(R.id.emp_code);
         arabicName = (TextView)findViewById(R.id.arabic_name);
@@ -67,30 +70,30 @@ public class PersonActivity extends SlidingActivity implements APIListener {
         department  = (TextView)findViewById(R.id.department_name);
         workEmail = (TextView)findViewById(R.id.work_email);
         engName = (TextView)findViewById(R.id.eng_name);
-        arabicShort  = (EditText)findViewById(R.id.arabic_short);
-        engShort  = (EditText)findViewById(R.id.eng_short);
-        officeExtension  = (EditText)findViewById(R.id.office_extension);
-        mobile1 = (EditText)findViewById(R.id.mobile1);
-        mobile2  = (EditText)findViewById(R.id.mobile2);
-        personalEmail = (EditText)findViewById(R.id.personal_email);
-        homePhone = (EditText)findViewById(R.id.home_phone);
-        socialStatus = (EditText)findViewById(R.id.social_status);
-        country = (EditText)findViewById(R.id.country);
-        city = (EditText)findViewById(R.id.city);
-        postalCode = (EditText)findViewById(R.id.postal_code);
-        address = (EditText)findViewById(R.id.address);
+//        arabicShort  = (EditText)findViewById(R.id.arabic_short);
+//        engShort  = (EditText)findViewById(R.id.eng_short);
+        officeExtension  = (TextView)findViewById(R.id.office_extension);
+        mobile1 = (TextView)findViewById(R.id.mobile1);
+        mobile2  = (TextView)findViewById(R.id.mobile2);
+        personalEmail = (TextView)findViewById(R.id.personal_email);
+        homePhone = (TextView)findViewById(R.id.home_phone);
+        socialStatus = (TextView)findViewById(R.id.social_status);
+        country = (TextView)findViewById(R.id.country);
+        city = (TextView)findViewById(R.id.city);
+        postalCode = (TextView)findViewById(R.id.postal_code);
+        address = (TextView)findViewById(R.id.address);
 
 
         getProfileDetails();
     }
 
-public void getProfileDetails(){
-Log.e("eweweeeeeeeeeee",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
-    Utility.showProgressDialog(PersonActivity.this, getString(R.string.Loading));
+    public void getProfileDetails(){
+        Log.e("eweweeeeeeeeeee",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
+        Utility.showProgressDialog(PersonActivity.this, getString(R.string.Loading));
 
 
         Map<String, String> mRetrofitHeader = new HashMap<>();
-       String TOKEN = Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
+        String TOKEN = Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
 
 
         mRetrofitHeader.put("token",TOKEN);
@@ -105,14 +108,14 @@ Log.e("eweweeeeeeeeeee",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN
 //    Map<String, String> mNewHeader = new HashMap<>();
 //
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
-    Constants.httpClient = new OkHttpClient.Builder();
+        Constants.httpClient = new OkHttpClient.Builder();
 
-    Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader,mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
 
-    new RetrofitAsynTask(0, ServerConfig.PROFILE_DETAIL, ServerConfig.METHOD_GET,mRetrofitHeader, null
-            , this, this).execute();
+        new RetrofitAsynTask(0, ServerConfig.PROFILE_DETAIL, ServerConfig.METHOD_GET,mRetrofitHeader, null
+                , this, this).execute();
 
-}
+    }
 
     @Override
     public void onSuccess(int id, String url, String response) {
@@ -141,8 +144,8 @@ Log.e("eweweeeeeeeeeee",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN
                 department.setText(jsonObject.getDeptEnName());
                 workEmail.setText(jsonObject.getWorkMail());
                 engName.setText(jsonObject.getPersonalMail());
-                arabicShort.setText(jsonObject.getEmpArShortName());
-                engShort.setText(jsonObject.getEmpEnShortName());
+//                arabicShort.setText(jsonObject.getEmpArShortName());
+//                engShort.setText(jsonObject.getEmpEnShortName());
                 officeExtension.setText(jsonObject.getExt());
                 mobile1.setText(jsonObject.getMobile1());
                 mobile2.setText(jsonObject.getMobile2());

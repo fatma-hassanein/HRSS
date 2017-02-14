@@ -54,13 +54,14 @@ import java.util.Random;
 import eg.intercom.hrss.activities.add.NewCompensationActivity;
 import eg.intercom.hrss.activities.add.NewMissionActivity;
 import eg.intercom.hrss.activities.add.NewPermissionActivity;
+import eg.intercom.hrss.activities.add.NewVacationActivity;
 import eg.intercom.hrss.api.APIListener;
 import eg.intercom.hrss.api.ProfileResults;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Log;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity
     FloatingActionButton manage;
     private BoomMenuButton boomMenuButton;
     TextView login;
+    TextView remaining;
     int counter=0;
     TextView logout;
     public Float allBalance;
@@ -128,20 +130,78 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-        Log.e("Constants.Demo", RetrofitAsynTask.DEMO_CONSTANT +"hh");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        role=  Constants.getDataInSharedPrefrences(Constants.ROLE,mContext);
+         Log.e("Constants.Demo", RetrofitAsynTask.DEMO_CONSTANT +"hh");
+         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         role=  Constants.getDataInSharedPrefrences(Constants.ROLE,mContext);
          gender = Constants.getDataInSharedPrefrences(Constants.GENDER,mContext);
 
-        login = (TextView) findViewById(R.id.login_time);
-        logout = (TextView) findViewById(R.id.logout_time);
-
+        login = (TextView) findViewById(R.id.sign_in_time);
+        logout = (TextView) findViewById(R.id.sign_out_time);
+        remaining = (TextView) findViewById(R.id.remaining_time);
         Bundle bundle = getIntent().getExtras();
         Signin = bundle.getString("in");
         Signout = bundle.getString("out");
-        login.setText(Signin);
-        logout.setText(Signout);
-        Log.e("signout33",Signout);
+        String[] separated = Signin.split(" ");
+        String in = separated[separated.length-1];
+
+        String signIn = in;
+        String[] separate = signIn.split(":");
+        String hour = separate[0];
+        String minute = separate[separate.length-1];
+        try {
+            int hourOfDay = Integer.parseInt(hour);
+
+            if(hourOfDay>12) {
+                if(hourOfDay>=11){
+                    login.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+
+
+                }else{
+                    login.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+
+                }
+                signIn=String.valueOf(hourOfDay-12)+ ":"+(String.valueOf(minute)+" PM");
+            } else if(hourOfDay==12) {
+                signIn="12"+ ":"+(String.valueOf(minute)+" PM");
+            } else if(hourOfDay<12) {
+                if(hourOfDay!=0) {
+                    signIn=String.valueOf(hourOfDay) + ":" + (String.valueOf(minute) + " AM");
+                } else {
+                   signIn="12" + ":" + (String.valueOf(minute) + " AM");
+                }
+            }
+        } catch(NumberFormatException nfe) {
+            System.out.println("Could not parse " + nfe);
+        }
+
+        String[] separated2 = Signin.split(" ");
+
+        String out = separated2[separated2.length-1];
+        String signOut = out;
+        String[] separateOut = signOut.split(":");
+        String hourOut = separateOut[0];
+        String minuteOut = separateOut[separateOut.length-1];
+        try {
+            int hourOfDayOut = Integer.parseInt(hourOut);
+            if(hourOfDayOut>12) {
+                signOut=String.valueOf(hourOfDayOut-12)+ ":"+(String.valueOf(minuteOut)+" PM");
+            } else if(hourOfDayOut==12) {
+                signOut="12"+ ":"+(String.valueOf(minuteOut)+" PM");
+            } else if(hourOfDayOut<12) {
+                if(hourOfDayOut!=0) {
+                    signOut=String.valueOf(hourOfDayOut) + ":" + (String.valueOf(minuteOut) + " AM");
+                } else {
+                    signOut="12" + ":" + (String.valueOf(minuteOut) + " AM");
+                }
+            }
+        } catch(NumberFormatException nfe) {
+            System.out.println("Could not parse " + nfe);
+        }
+        login.setText(signIn);
+        login.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+        logout.setText(signOut);
+        Log.e("signout33",signOut);
+        logout.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
 
         Log.e("role33",role);
         manage = (FloatingActionButton) findViewById(R.id.manage);
@@ -472,7 +532,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intt);
                 break;
             case 3:
-                Intent intet = new Intent(this, VacationCategoryActivity.class);
+                Intent intet = new Intent(this, NewVacationActivity.class);
                 startActivity(intet);
                 break;
         }
@@ -539,9 +599,10 @@ public class MainActivity extends AppCompatActivity
 
         int[][] colors = new int[number][2];
         for (int i = 0; i < number; i++) {
-            colors[i][1] =GetRandomColor();
 
-            colors[i][0] = Util.getInstance().getPressedColor(colors[i][1]);
+            colors[i][1] = GetRandomColor(i);
+
+//            colors[i][0] = Util.getInstance().getPressedColor(colors[i][1]);
 
         }
 
@@ -600,22 +661,22 @@ public class MainActivity extends AppCompatActivity
 
     private String[] Colors = {
 
-            "#fc1100",
-            "#E91E63",
-            "#9C27B0",
             "#2196F3",
-            "#25fc2e",
-            "#CDDC39",
-            "#FFC107",
-            "#ff7f00",
-            "#795548",
-            "#607D8B"};
+            "#db8a00",
+            "#ff3426",
+            "#25fc2e"};
 
-    public int GetRandomColor() {
-        Random random = new Random();
-        int p = random.nextInt(Colors.length);
+//            "#2196F3",
+//            "#25fc2e",
+//            "#CDDC39",
+//            "#FFC107",
+//            "#ff7f00",
+//            "#795548",
 
-        return Color.parseColor(Colors[p]);
+
+    public int GetRandomColor(int x) {
+
+        return Color.parseColor(Colors[x]);
     }
 
     private void initViews() {
@@ -652,7 +713,7 @@ public class MainActivity extends AppCompatActivity
         mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mNewHeader,mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mNewHeader,mContext));
 
         new RetrofitAsynTask(0, ServerConfig.VAC_BALANCE, ServerConfig.METHOD_GET,mNewHeader, null
                 , this, this).execute();
@@ -767,7 +828,7 @@ public class MainActivity extends AppCompatActivity
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader,mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
         new RetrofitAsynTask(1, ServerConfig.PROFILE_DETAIL, ServerConfig.METHOD_GET,mRetrofitHeader, null
                 , this, this).execute();
 

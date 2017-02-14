@@ -136,7 +136,7 @@
     <string name="title_activity_permission">Permission</string>
     <string name="title_activity_mission">missions</string>
     <string name="title_activity_reports">Reports</string>
-    <string name="title_activity_manager">Manager Options</string>
+    <string name="title_activity_category">Vacation Category</string>
     <string name="title_activity_manage">Managing</string>
     <string name="annual">Annual Leave</string>
     <string name="pilgrimage">Pilgrimage Leave</string>
@@ -189,7 +189,10 @@
     <string name="mission_request">New mission request</string>
     <string name="multiple_request">New multiple mission request</string>
     <string name="partial_request">New partial mission request</string>
-
+  <string name="sign_in">In</string>
+  <string name="sign_out">Out</string>
+  <string name="remaining">Remaining</string>
+<string name="un_set">Unset</string>
     <string name="time_to">To</string>
     <string name="time_from">From</string>
     <string name="mission_type">Mission Type</string>
@@ -222,8 +225,6 @@
     <string name="str_sky_blue">#33B5E5</string>
     <string name="title_activity_test">TestActivity</string>
 
-  <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
