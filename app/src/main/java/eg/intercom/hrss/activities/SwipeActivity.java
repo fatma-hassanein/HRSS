@@ -32,13 +32,14 @@ import eg.intercom.hrss.api.ResultPendingRequest;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import okhttp3.OkHttpClient;
 
 public class SwipeActivity extends ActionBarActivity implements APIListener,SwipeRefreshLayout.OnRefreshListener  {
 	Context mContext;
 	String TAG = "ManageActivity Test";
+
 
 	private ListView cmn_list_view;
 	private ListAdapter listAdapter;
@@ -93,7 +94,7 @@ public class SwipeActivity extends ActionBarActivity implements APIListener,Swip
 		mRetrofitHeader.put("token",TOKEN);
 		Utility.generateRetrofitHttpHeader(this);
 		Constants.httpClient = new OkHttpClient.Builder();
-		Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader,mContext));
+		Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
 
 		new RetrofitAsynTask(0, ServerConfig.PENDING_REQUEST, ServerConfig.METHOD_GET,mRetrofitHeader, null
 				, this, this).execute();
@@ -131,7 +132,7 @@ public class SwipeActivity extends ActionBarActivity implements APIListener,Swip
 			Utility.generateRetrofitHttpHeader(SwipeActivity.this);
 
 			Constants.httpClient = new OkHttpClient.Builder();
-			Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+			Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
 
 			if(item.getRequestType().equals("v")){
 
@@ -189,7 +190,7 @@ public class SwipeActivity extends ActionBarActivity implements APIListener,Swip
 			Utility.generateRetrofitHttpHeader(SwipeActivity.this);
 
 			Constants.httpClient = new OkHttpClient.Builder();
-			Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+			Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
 			Map<String, String> mRetrofitParams = new HashMap<>();
 			String url = "";

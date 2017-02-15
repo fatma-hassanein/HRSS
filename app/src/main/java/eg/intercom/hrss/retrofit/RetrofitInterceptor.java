@@ -19,7 +19,7 @@ import okhttp3.Response;
 public class RetrofitInterceptor implements Interceptor {
 
     Map<String, String> retrofitheaders;
- //   CustomSharedPrefrences CustomPrefrence;
+    //   CustomSharedPrefrences CustomPrefrence;
     Context mContext;
 
     public RetrofitInterceptor(Map<String, String> mretrofitheaders, Context mContext) {
@@ -47,7 +47,7 @@ public class RetrofitInterceptor implements Interceptor {
 
         if (retrofitheaders != null &&retrofitheaders.size()>0) {
             Log.e("mHeaders found","here");
-          //  retrofitheaders.put(Constants.USER_TOKEN,Constants.getDataInSharedPrefrences(Constants.USER_TOKEN));
+            //  retrofitheaders.put(Constants.USER_TOKEN,Constants.getDataInSharedPrefrences(Constants.USER_TOKEN));
 
 
             // Fill in the Form parameters
@@ -55,7 +55,7 @@ public class RetrofitInterceptor implements Interceptor {
                 Object value = retrofitheaders.get(key);
                 if (value != null) {
                     builder.addHeader(key, value.toString());
-                   Log.e("mHeaders", key + ":" + value.toString());
+                    Log.e("mHeaders", key + ":" + value.toString());
                 } else{
                     Log.e("2222 construcor","here");
                     retrofitheaders.put(key, null);}
@@ -65,7 +65,7 @@ public class RetrofitInterceptor implements Interceptor {
         }
 
 
-      Request request = builder.build();
+        Request request = builder.build();
         Response response = chain.proceed(request);
         return response;
     }
