@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorSignout">#9D69A3</color>
+    <color name="accent_color">@color/blue</color>
+    <color name="blue">#303F9F</color>
 
     <color name="colorSignin">#61707D</color>
     <color name="colorAccent">#b7c7ce</color>
@@ -15,6 +17,15 @@
     <color name="dark_activity_primary">#FF5722</color>
     <color name="dark_activity_primary_dark">#D84315</color>
     <color name="fab_activity_primary">#673ab7</color>
+    <color name="comp_activity">#2196F3</color>
+    <color name="comp_activity_dark">#027bdb</color>
+    <color name="mis_activity">#fff323</color>
+    <color name="per_activity">#ff3426</color>
+    <color name="per_activity_dark">#d60e00</color>
+    <color name="vac_activity">#25fc2e</color>
+    <color name="vac_activity_dark">#00db09</color>
+
+    <color name="mis_activity_dark">#f2e500</color>
     <color name="fab_activity_primary_dark">#512da8</color>
     <color name="background_user_navigation_drawer">#2a4867</color>
     <color name="fab_activity_accent">#607d8b</color>

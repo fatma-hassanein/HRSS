@@ -31,7 +31,7 @@ import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Log;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -275,7 +275,7 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
 
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mPermissionHeader,mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mPermissionHeader,mContext));
 
         new RetrofitAsynTask(0, ServerConfig.PERMISSION_REQUEST, ServerConfig.METHOD_POST,mPermissionHeader,mRetrofitParams
                 , this, this).execute();

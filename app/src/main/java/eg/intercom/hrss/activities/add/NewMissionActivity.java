@@ -17,7 +17,6 @@ import android.widget.DatePicker;
 
 
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +33,7 @@ import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Log;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -44,28 +43,19 @@ import okhttp3.OkHttpClient;
  */
 public  class NewMissionActivity extends AppCompatActivity implements APIListener {
     public static String ARG_CLICKED;
-    Button partialMisBtn;
-    Button multipleMisBtn;
+    Button partialMisBtn , multipleMisBtn,sendBtn;
     DatePicker missionDate;
-    static Button frOmBtn;
-    static Button tOBtn;
-    static  Button startBtn;
+    static Button frOmBtn, tOBtn,startBtn,endBtn;
       String missionType;
     public  JSONObject resultObject=null;
     public String msg;
 
     Context mContext;
     String TAG = "MissionActivity Test";
-    static  Button endBtn;
+
     EditText remark;
-    String year ;
-    String month ;
-    String day;
-    String fromDate;
-    String toDate;
-    String date;
-    String remarks;
-    Button sendBtn;
+    String year ,month , day, fromDate,toDate, date, remarks;
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -592,8 +582,9 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Log.e("onTime set TimeHandler",dayOfMonth +"found");
-            NewMissionActivity.getMissionDate(dayOfMonth,monthOfYear,year);
+            Log.e("onTime set TimeHandler",monthOfYear +"found");
+            int monthoFYear = monthOfYear+1;
+            NewMissionActivity.getMissionDate(dayOfMonth,monthoFYear,year);
         }
     }
 
@@ -607,6 +598,7 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         Utility.generateRetrofitHttpHeader(this);
         year = missionDate.getYear()+"";
          month =  missionDate.getMonth()+"";
+
         month = month.length()<2 ?  "0"+month : month ;
          day = missionDate.getDayOfMonth()+"";
         day = day.length()<2 ?  "0"+day : day ;
@@ -638,7 +630,7 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
 
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mMissionHeader,mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mMissionHeader,mContext));
 
         new RetrofitAsynTask(0, ServerConfig.PERMISSION_REQUEST, ServerConfig.METHOD_POST,mMissionHeader,mRetrofitParams
                 , this, this).execute();

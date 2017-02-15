@@ -17,7 +17,7 @@ import eg.intercom.hrss.api.MissionHistoryResults;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
 import okhttp3.OkHttpClient;
 
@@ -49,8 +49,8 @@ public class MissionActivity extends SlidingActivity implements APIListener {
 
 
         setPrimaryColors(
-                getResources().getColor(R.color.fab_activity_primary),
-                getResources().getColor(R.color.fab_activity_primary_dark)
+                getResources().getColor(R.color.mis_activity),
+                getResources().getColor(R.color.mis_activity_dark)
         );
         setContent(R.layout.activity_mission);
         setFab(
@@ -105,7 +105,7 @@ public class MissionActivity extends SlidingActivity implements APIListener {
 //    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
-        Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
         new RetrofitAsynTask(0, ServerConfig.MISSION_HISTORY, ServerConfig.METHOD_GET, mRetrofitHeader, null
                 , this, this).execute();

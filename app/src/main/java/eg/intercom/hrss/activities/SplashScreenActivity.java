@@ -81,7 +81,7 @@ public class SplashScreenActivity extends Activity {
 //d
 //        Constants.httpClient = new OkHttpClient.Builder();
 //
-//        Constants.httpClient.addInterceptor(new RerofitInterceptor(mHeader));
+//        Constants.httpClient.addInterceptor(new RetrofitInterceptor(mHeader));
 //
 //iii
 //

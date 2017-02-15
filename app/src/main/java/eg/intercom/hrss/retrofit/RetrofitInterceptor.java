@@ -16,17 +16,17 @@ import okhttp3.Response;
 /**
  * Created by Hager.Magdy on 9/26/2016.
  */
-public class RerofitInterceptor implements Interceptor {
+public class RetrofitInterceptor implements Interceptor {
 
     Map<String, String> retrofitheaders;
- //   CustomSharedPrefrences CustomPrefrence;
+    //   CustomSharedPrefrences CustomPrefrence;
     Context mContext;
 
-    public RerofitInterceptor(Map<String, String> mretrofitheaders,Context mContext) {
+    public RetrofitInterceptor(Map<String, String> mretrofitheaders, Context mContext) {
 
         this.retrofitheaders = mretrofitheaders;
         this.mContext = mContext;
-        Log.e("RerofitInterceptor  is",retrofitheaders.size() +"fkfo");
+        Log.e("RetrofitInterceptor  is",retrofitheaders.size() +"fkfo");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RerofitInterceptor implements Interceptor {
 
         if (retrofitheaders != null &&retrofitheaders.size()>0) {
             Log.e("mHeaders found","here");
-          //  retrofitheaders.put(Constants.USER_TOKEN,Constants.getDataInSharedPrefrences(Constants.USER_TOKEN));
+            //  retrofitheaders.put(Constants.USER_TOKEN,Constants.getDataInSharedPrefrences(Constants.USER_TOKEN));
 
 
             // Fill in the Form parameters
@@ -55,7 +55,7 @@ public class RerofitInterceptor implements Interceptor {
                 Object value = retrofitheaders.get(key);
                 if (value != null) {
                     builder.addHeader(key, value.toString());
-                   Log.e("mHeaders", key + ":" + value.toString());
+                    Log.e("mHeaders", key + ":" + value.toString());
                 } else{
                     Log.e("2222 construcor","here");
                     retrofitheaders.put(key, null);}
@@ -65,7 +65,7 @@ public class RerofitInterceptor implements Interceptor {
         }
 
 
-      Request request = builder.build();
+        Request request = builder.build();
         Response response = chain.proceed(request);
         return response;
     }

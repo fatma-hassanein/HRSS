@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.LinearLayout;
@@ -30,36 +32,40 @@ import eg.intercom.hrss.api.ResultPendingRequest;
 import eg.intercom.hrss.api.ServerConfig;
 import eg.intercom.hrss.helpers.Constants;
 import eg.intercom.hrss.helpers.Utility;
-import eg.intercom.hrss.retrofit.RerofitInterceptor;
 import eg.intercom.hrss.retrofit.RetrofitAsynTask;
+import eg.intercom.hrss.retrofit.RetrofitInterceptor;
 import okhttp3.OkHttpClient;
 
-public class SwipeActivity extends Activity implements APIListener {
+public class SwipeActivity extends ActionBarActivity implements APIListener,SwipeRefreshLayout.OnRefreshListener  {
 	Context mContext;
 	String TAG = "ManageActivity Test";
 
+
 	private ListView cmn_list_view;
 	private ListAdapter listAdapter;
-//	public LstMisReq lstMisReq;
+	private SwipeRefreshLayout swipeRefreshLayout;
 	private ArrayList<PendingRequestModel> results;
-	private ArrayList<PendingRequestModel> perlistdata,missListdata,vaclstdata;
-	private ResultPendingRequest pendingRequest;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe);
-		cmn_list_view	=	(ListView) findViewById(R.id.cmn_list_view);
-
-	//	perlistdata	=	new ArrayList<PendingRequestModel>();
-
-		///////////////
-		pendingRequest = new ResultPendingRequest();
-		results		=	new ArrayList<PendingRequestModel>();
 
 		mContext=this;
 
-		getPendingRequest();
+		cmn_list_view	=	(ListView) findViewById(R.id.cmn_list_view);
+		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.manager_refresh_layout);
+		swipeRefreshLayout.setOnRefreshListener(this);
+
+		swipeRefreshLayout.post(new Runnable() {
+									@Override
+									public void run() {
+										swipeRefreshLayout.setRefreshing(true);
+										getPendingRequest();
+									}
+								}
+		);
 
 		final ListViewSwipeGesture touchListener = new ListViewSwipeGesture(
 				cmn_list_view, swipeListener, this);
@@ -70,32 +76,25 @@ public class SwipeActivity extends Activity implements APIListener {
 		
 	}
 
+	@Override
+	public void onRefresh() {
+		getPendingRequest();
+	}
+
 
 	public void getPendingRequest(){
 
 		Log.e("eweweeeeeeeeeee", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
 		Utility.showProgressDialog(SwipeActivity.this, getString(R.string.Loading));
 
-//        resultObject=new JSONObject(response);
-//
-//        String mResult= resultObject.getString("result");
-//        if(mResult.equalsIgnoreCase("1")){
-//            openingBalance= resultObject.getString("openingBalance");
-//            balance= resultObject.getString("balance");
-
-//    Map<String, String> mNewHeader = new HashMap<>();
-//
-//    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
+		swipeRefreshLayout.setRefreshing(true);
 
 		Map<String, String> mRetrofitHeader = new HashMap<>();
 		String TOKEN = Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
-
 		mRetrofitHeader.put("token",TOKEN);
 		Utility.generateRetrofitHttpHeader(this);
-
 		Constants.httpClient = new OkHttpClient.Builder();
-
-		Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader,mContext));
+		Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
 
 		new RetrofitAsynTask(0, ServerConfig.PENDING_REQUEST, ServerConfig.METHOD_GET,mRetrofitHeader, null
 				, this, this).execute();
@@ -103,16 +102,8 @@ public class SwipeActivity extends Activity implements APIListener {
 	}
 
 	private void InitializeValues() {
-		// TODO Auto-generated method stub
-//		listdata.add(new dumpclass("one"));
-//		listdata.add(new dumpclass("two"));
-//		listdata.add(new dumpclass("three"));
-//		listdata.add(new dumpclass("four"));
-//		listdata.add(new dumpclass("five"));
-//		listdata.add(new dumpclass("six"));
-//		listdata.add(new dumpclass("seven"));
-//		listdata.add(new dumpclass("Eight"));
-		listAdapter		=	new ListAdapter(mContext, results);
+
+		listAdapter	= new ListAdapter(mContext, results);
 		cmn_list_view.setAdapter(listAdapter);
 	}
 
@@ -141,7 +132,7 @@ public class SwipeActivity extends Activity implements APIListener {
 			Utility.generateRetrofitHttpHeader(SwipeActivity.this);
 
 			Constants.httpClient = new OkHttpClient.Builder();
-			Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+			Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader,mContext));
 
 			if(item.getRequestType().equals("v")){
 
@@ -199,7 +190,7 @@ public class SwipeActivity extends Activity implements APIListener {
 			Utility.generateRetrofitHttpHeader(SwipeActivity.this);
 
 			Constants.httpClient = new OkHttpClient.Builder();
-			Constants.httpClient.addInterceptor(new RerofitInterceptor(mRetrofitHeader, mContext));
+			Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
 
 			Map<String, String> mRetrofitParams = new HashMap<>();
 			String url = "";
@@ -277,12 +268,12 @@ public class SwipeActivity extends Activity implements APIListener {
 				Utility.removeProgressDialog();
 			eg.intercom.hrss.helpers.Log.e("person Response in main", response + "gg");
 			try {
-//			results = new LstMisReq();
 				ResultPendingRequest resultPendingRequest = new ResultPendingRequest();
 				Gson gson = new Gson();
 
 				resultPendingRequest = gson.fromJson(response, ResultPendingRequest.class);
 				String mResult = String.valueOf(resultPendingRequest.getResult());
+
 				if (mResult.trim().equalsIgnoreCase("1")) {
 
 					List<PendingRequestModel> vacReq = resultPendingRequest.getLstVacReq();
@@ -300,15 +291,19 @@ public class SwipeActivity extends Activity implements APIListener {
 					setRequestType(compReqs, "comp");
 					setRequestType(misReqs, "miss");
 					setRequestType(perReqs, "perm");
+
+					results = new ArrayList<PendingRequestModel>();
+
 					results.addAll(vacReq);
 					results.addAll(misReqs);
 					results.addAll(compReqs);
 					results.addAll(perReqs);
 
 					Log.e("results data", results.size() + "dd");
-					//results = (ArrayList<PendingRequestModel>) misReqs;
 
 					InitializeValues();
+
+					swipeRefreshLayout.setRefreshing(false);
 
                         /*if (oneVacReq.length()> 2 )
                             Log.v(TAG,"oneVacReq :: "+oneVacReq +"====="+vacReqArr.length());
@@ -329,6 +324,7 @@ public class SwipeActivity extends Activity implements APIListener {
                         }*/
 
 				} else {
+
 				}
 
 			} catch (Exception e) {
@@ -336,7 +332,16 @@ public class SwipeActivity extends Activity implements APIListener {
 			}
 		}
 		else{
-			//handle Accept Request
+			if(id == ServerConfig.AcceptID || id == ServerConfig.VAcceptID)
+			{
+				Toast.makeText(getApplicationContext(),"Request Accepted", Toast.LENGTH_SHORT).show();
+				getPendingRequest();
+			}
+			else
+			if(id == ServerConfig.RejectID){
+				Toast.makeText(getApplicationContext(),"Request Rejected", Toast.LENGTH_SHORT).show();
+				getPendingRequest();
+			}
 
 		}
 	}
@@ -344,6 +349,8 @@ public class SwipeActivity extends Activity implements APIListener {
 	@Override
 	public void onFailure(int id, String url, String response, int responseCode) {
 
+		if(id == 0)
+			swipeRefreshLayout.setRefreshing(false);
 	}
 
 	public void setRequestType(List<PendingRequestModel>mList,String flag){
@@ -351,35 +358,24 @@ public class SwipeActivity extends Activity implements APIListener {
 			case "perm":
 				for(int i=0;i<mList.size();i++){
 					mList.get(i).setRequestType("p");
-
-
 				}
 				break;
 			case "vac":
 				for(int i=0;i<mList.size();i++){
 					mList.get(i).setRequestType("v");
-
-
 				}
 				break;
 			case "miss":
 				for(int i=0;i<mList.size();i++){
 					mList.get(i).setRequestType("m");
-
-
 				}
 				break;
 			case "comp":
 				for(int i=0;i<mList.size();i++){
 					mList.get(i).setRequestType("c");
-
-
 				}
 				break;
 		}
-
-
-
 
 	}
 }

@@ -23,25 +23,21 @@ public class CompensationAdapter extends RecyclerView.Adapter<CompensationAdapte
 
 
     Context mContext;
-    String TAG = "PermissionAdapter";
-
     ArrayList<LstCompHst> requestsHistory;
 
     public  CompensationAdapter (Context context, ArrayList<LstCompHst> lstCompHstArrayList) {
 
         this.mContext = context;
-
-
         this.requestsHistory = lstCompHstArrayList;
-
-
     }
+
     @Override
     public CompensationAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         view = LayoutInflater.from(mContext).inflate(R.layout.comp_item_history, null);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(lp);
         ViewHolder viewHolder = new ViewHolder(view);
-//        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_row, null);
         return viewHolder;
     }
 
@@ -51,6 +47,21 @@ public class CompensationAdapter extends RecyclerView.Adapter<CompensationAdapte
 
         holder.text.setText(lst.getEmpEnName());
         holder.startDate.setText(lst.getStartDate());
+
+        switch (lst.getStatus()) {
+            case "0":
+                holder.status.setText("Pending");
+                holder.statusImg.setImageResource(R.drawable.pending_img);
+                break;
+            case "3":
+                holder.status.setText("Approved");
+                holder.statusImg.setImageResource(R.drawable.approve_img);
+                break;
+            case "4":
+                holder.status.setText("Rejected");
+                holder.statusImg.setImageResource(R.drawable.reject_img);
+                break;
+        }
     }
 
     @Override
@@ -60,17 +71,19 @@ public class CompensationAdapter extends RecyclerView.Adapter<CompensationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView text;
-        protected   TextView startDate;
-        protected ImageView image;
+        protected TextView startDate;
+        protected TextView status;
+        protected ImageView statusImg;
 
         public ViewHolder(View view){
 
             super(view);
             this.text = (TextView) view.findViewById(R.id.comp_his);
             this.startDate  = (TextView) view.findViewById(R.id.comp_start_date);
+            this.status = (TextView) view.findViewById(R.id.comp_status);
+            this.statusImg = (ImageView) view.findViewById(R.id.status_image);
 
         }
-
 
 
     }

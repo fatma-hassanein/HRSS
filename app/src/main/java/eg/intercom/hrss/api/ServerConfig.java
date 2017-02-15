@@ -33,7 +33,6 @@ public class ServerConfig {
     public static final int CancelID = 3;
 
     public static final int VAcceptID = 4;
-    //public static final int VRejectID = 5;
     public static final int VCancelID = 6;
 
     private ServerConfig() {
