@@ -17,10 +17,14 @@ import android.widget.DatePicker;
 
 
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,19 +48,22 @@ import okhttp3.OkHttpClient;
 public  class NewMissionActivity extends AppCompatActivity implements APIListener {
     public static String ARG_CLICKED;
     Button partialMisBtn , multipleMisBtn,sendBtn;
-    DatePicker missionDate;
-    static Button frOmBtn, tOBtn,startBtn,endBtn;
+   // DatePicker missionDate;
+    static TextView fromT, toT,startD,endD;
       String missionType;
     public  JSONObject resultObject=null;
     public String msg;
-
+    Date fromDa = null;
+    Date toDa = null;
     Context mContext;
+    String dateToday;
+
     String TAG = "MissionActivity Test";
 
     EditText remark;
-    String year ,month , day, fromDate,toDate, date, remarks;
+    String year ,month , day, fromDate,toDate, date, remarks,fromTime,toTime;
 
-
+    LinearLayout startLay,endLay,fromLay,toLay;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.
@@ -74,25 +81,49 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_mission_request);
-        frOmBtn = (Button) findViewById(R.id.from);
-        tOBtn = (Button) findViewById(R.id.to);
+        fromT = (TextView) findViewById(R.id.from);
+        toT = (TextView) findViewById(R.id.to);
         partialMisBtn = (Button) findViewById(R.id.partial_button);
         multipleMisBtn = (Button) findViewById(R.id.multiple_button);
-        startBtn = (Button) findViewById(R.id.fromDate);
-        endBtn = (Button) findViewById(R.id.toDate);
-        missionDate = (DatePicker) findViewById(R.id.datePicker_new_mission);
+        startD = (TextView) findViewById(R.id.start_text);
+        endD = (TextView) findViewById(R.id.end_text);
+     //   missionDate = (DatePicker) findViewById(R.id.datePicker_new_mission);
         remark = (EditText) findViewById(R.id.mis_remark);
         sendBtn = (Button) findViewById(R.id.mis_send);
+        startLay = (LinearLayout) findViewById(R.id.start_lay);
 
+        endLay = (LinearLayout) findViewById(R.id.end_lay);
+        fromLay = (LinearLayout) findViewById(R.id.from_lay);
+        toLay = (LinearLayout) findViewById(R.id.to_lay);
        partialMisBtn.setSelected(true);
-        startBtn.setVisibility(View.INVISIBLE);
-        endBtn.setVisibility(View.INVISIBLE);
-
+        startLay.setVisibility(View.VISIBLE);
+        endLay.setVisibility(View.INVISIBLE);
+        String currentTimeString = java.text.DateFormat.getTimeInstance().format(new Date());
+        String currentDateTimeString = java.text.DateFormat.getDateInstance().format(new Date());
+        startD.setText(currentDateTimeString);
+        endD.setText(currentDateTimeString);
+        fromT.setText(currentTimeString);
+        toT.setText(currentTimeString);
+        dateToday = startD.getText().toString();
+        toDate = endD.getText().toString();
+        fromTime = fromT.getText().toString();
+        toTime = toT.getText().toString();
         missionType="1";
         mContext = this;
-
+        dateToday = startD.getText().toString();
         Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
+        SimpleDateFormat simFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat input = new SimpleDateFormat("dd MMM yyyy");
 
+        try {
+            fromDa = input.parse(dateToday);
+            toDa = input.parse(toDate);
+            startD.setText(simFormat.format(fromDa));
+
+            endD.setText(simFormat.format(toDa));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         View.OnClickListener buttonsListeners = new View.OnClickListener() {
             @Override
@@ -100,25 +131,24 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
                 if (v.getId() == R.id.partial_button){
                     partialMisBtn.setSelected(true);
                     multipleMisBtn.setSelected(false);
-                    startBtn.setVisibility(View.INVISIBLE);
+                    startLay.setVisibility(View.VISIBLE);
 
 
-                    endBtn.setVisibility(View.INVISIBLE);
-                    missionDate.setVisibility(View.VISIBLE);
-                    frOmBtn.setVisibility(View.VISIBLE);
-                    tOBtn.setVisibility(View.VISIBLE);
+                    endLay.setVisibility(View.INVISIBLE);
+                   // missionDate.setVisibility(View.VISIBLE);
+                    fromLay.setVisibility(View.VISIBLE);
+                    toLay.setVisibility(View.VISIBLE);
                     missionType = "1";
                 }
                 else {
                     multipleMisBtn.setSelected(true);
                     partialMisBtn.setSelected(false);
-                    startBtn.setVisibility(View.VISIBLE);
-                    endBtn.setVisibility(View.VISIBLE);
+                    startLay.setVisibility(View.VISIBLE);
+                    endLay.setVisibility(View.VISIBLE);
 
 
-                    missionDate.setVisibility(View.INVISIBLE);
-                    frOmBtn.setVisibility(View.INVISIBLE);
-                    tOBtn.setVisibility(View.INVISIBLE);
+                    fromLay.setVisibility(View.INVISIBLE);
+                    toLay.setVisibility(View.INVISIBLE);
                     missionType = "2";
                 }
             }
@@ -126,10 +156,10 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         partialMisBtn.setOnClickListener(buttonsListeners);
         multipleMisBtn.setOnClickListener(buttonsListeners);
 
-        startBtn.setOnClickListener(new View.OnClickListener() {
+        startD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startBtn.setPressed(true);
+            startD.setPressed(true);
 
                 showDate(v);
                 ARG_CLICKED = "from";
@@ -137,19 +167,19 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
             }
         });
 
-        endBtn.setOnClickListener(new View.OnClickListener() {
+        endD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            endBtn.setPressed(true);
+            endD.setPressed(true);
                 showDate(v);
                 ARG_CLICKED="to";
             }
         });
 
-        frOmBtn.setOnClickListener(new View.OnClickListener() {
+        fromT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            frOmBtn.setPressed(true);
+            fromT.setPressed(true);
                 showTime(v);
                 ARG_CLICKED="from";
 
@@ -157,10 +187,10 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         });
 
 
-        tOBtn.setOnClickListener(new View.OnClickListener() {
+        toT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            tOBtn.setPressed(true);
+            toT.setPressed(true);
                 showTime(v);
                 ARG_CLICKED="to";
 
@@ -170,29 +200,30 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                year = missionDate.getYear()+"";
-                month =  missionDate.getMonth()+1+"";
-                month = month.length()<2 ?  "0"+month : month ;
-                day = missionDate.getDayOfMonth()+"";
-                day = day.length()<2 ?  "0"+day : day ;
-                date = day+"/"+month+"/"+year;
+//                year = missionDate.getYear()+"";
+//                month =  missionDate.getMonth()+1+"";
+//                month = month.length()<2 ?  "0"+month : month ;
+//                day = missionDate.getDayOfMonth()+"";
+//                day = day.length()<2 ?  "0"+day : day ;
+//                date = day+"/"+month+"/"+year;
                 remarks= remark.getText().toString();
 
                 fromDate=null;
                 toDate= null;
+                dateToday = startD.getText().toString();
 
 
                 if (missionType == "1"){
-                    Log.v(TAG,"multiple from date "+ frOmBtn.getText());
-                    Log.v(TAG,"multiple to date "+ tOBtn.getText());
-                    if(Utility.isNotNull(frOmBtn.getText().toString())){
-                        fromDate = date + " " + frOmBtn.getText();
+                    Log.v(TAG,"multiple from date "+ fromT.getText());
+                    Log.v(TAG,"multiple to date "+ toT.getText());
+                    if(Utility.isNotNull(fromT.getText().toString())){
+                        fromDate = dateToday + " " + fromT.getText();
                     if(fromDate.contains("From")){
 
                         fromDate=null;
                     }}
-                    if(Utility.isNotNull(tOBtn.getText().toString())){
-                        toDate   = date + " " + tOBtn.getText();
+                    if(Utility.isNotNull(toT.getText().toString())){
+                        toDate   = dateToday + " " + toT.getText();
                     if(toDate.contains("To")){
 
                         toDate=null;
@@ -200,16 +231,16 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
                 }
 
                 else {
-                    Log.v(TAG,"multiple from date "+ startBtn.getText());
-                    Log.v(TAG,"multiple to date "+ endBtn.getText());
-                    if(Utility.isNotNull(startBtn.getText().toString())){
-                        fromDate = startBtn.getText().toString() + " 00:00";
+                    Log.v(TAG,"multiple from date "+ startD.getText());
+                    Log.v(TAG,"multiple to date "+ endD.getText());
+                    if(Utility.isNotNull(startD.getText().toString())){
+                        fromDate = startD.getText().toString() + " 00:00";
                     if(fromDate.contains("Start Date")){
 
                         fromDate=null;
                     }}
-                    if(Utility.isNotNull(endBtn.getText().toString())){
-                        toDate   = endBtn.getText().toString() + " 00:00";
+                    if(Utility.isNotNull(endD.getText().toString())){
+                        toDate   = endD.getText().toString() + " 00:00";
                     if(toDate.contains("End Date")){
 
                         toDate=null;
@@ -222,10 +253,10 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
                 Log.v(TAG, "description :: " + remarks);
                 Log.v(TAG, "R.string.com_param_date " + R.string.com_param_date + "");
                 Log.v(TAG,"mission type :"+ missionType);
-                Log.v(TAG,"partial from time :"+ frOmBtn.getText());
-                Log.v(TAG,"partial to time "+ tOBtn.getText()) ;
-                Log.v(TAG,"multiple from date "+ startBtn.getText());
-                Log.v(TAG,"multiple to date "+ endBtn.getText());
+                Log.v(TAG,"partial from time :"+ fromT.getText());
+                Log.v(TAG,"partial to time "+ toT.getText()) ;
+                Log.v(TAG,"multiple from date "+ startD.getText());
+                Log.v(TAG,"multiple to date "+ endD.getText());
                 Log.v(TAG ,"final from date " +fromDate);
                 Log.v(TAG ,"final to date " +toDate);
 
@@ -320,11 +351,11 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         System.out.println("dddddddd      "+ARG_CLICKED);
 
         if (ARG_CLICKED=="from") {
-            startBtn.setText(day + "/" + month + "/" + year);
-            startBtn.setPressed(false);
+            startD.setText(day + "/" + month + "/" + year);
+         //   startD.setPressed(false);
         } else  {
-            endBtn.setText(day + "/" + month + "/" + year);
-            endBtn.setPressed(false);
+            endD.setText(day + "/" + month + "/" + year);
+            //endD.setPressed(false);
         }
     }
     public static  void getMissionTime (int hours, int minute) {
@@ -338,13 +369,13 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
         android.util.Log.v("","ssssssss      "+ARG_CLICKED);
 
         if (ARG_CLICKED=="from") {
-            frOmBtn.setText(stHours + ":" + stMinute);
-            frOmBtn.setPressed(false);
+            fromT.setText(stHours + ":" + stMinute);
+          //  fromT.setPressed(false);
         } else  {
 
-            tOBtn.setText(stHours + ":" + stMinute);
+            toT.setText(stHours + ":" + stMinute);
             Log.e("totime",stHours + ":" + stMinute);
-            tOBtn.setPressed(false);
+          //  toT.setPressed(false);
         }
     }
     public void showTime(View view){
@@ -596,13 +627,13 @@ public  class NewMissionActivity extends AppCompatActivity implements APIListene
 
         Utility.showProgressDialog(NewMissionActivity.this, getString(R.string.Loading));
         Utility.generateRetrofitHttpHeader(this);
-        year = missionDate.getYear()+"";
-         month =  missionDate.getMonth()+"";
-
-        month = month.length()<2 ?  "0"+month : month ;
-         day = missionDate.getDayOfMonth()+"";
-        day = day.length()<2 ?  "0"+day : day ;
-        date = day+"/"+month+"/"+year;
+//        year = missionDate.getYear()+"";
+//         month =  missionDate.getMonth()+"";
+//
+//        month = month.length()<2 ?  "0"+month : month ;
+//         day = missionDate.getDayOfMonth()+"";
+//        day = day.length()<2 ?  "0"+day : day ;
+//        date = day+"/"+month+"/"+year;
         Map<String, String> mRetrofitParams = new HashMap<>();
         mRetrofitParams.put("fromDateTime", fromDate);
         mRetrofitParams.put("toDateTime",  toDate);

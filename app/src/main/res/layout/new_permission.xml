@@ -9,62 +9,86 @@
     >
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+<!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
 
-    <DatePicker
+    <!--<DatePicker-->
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker_new_permission"
-        android:calendarViewShown="false"
-        android:focusable="true"
-        android:focusableInTouchMode="false"
-        android:splitMotionEvents="true"
-        android:spinnersShown="true"
-        android:soundEffectsEnabled="true"
-        android:datePickerMode="spinner"
-        android:layout_marginLeft="70dp"
-        android:layout_gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-</LinearLayout>
-
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/datePicker_new_permission"-->
+        <!--android:calendarViewShown="false"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="false"-->
+        <!--android:splitMotionEvents="true"-->
+        <!--android:spinnersShown="true"-->
+        <!--android:soundEffectsEnabled="true"-->
+        <!--android:datePickerMode="spinner"-->
+        <!--android:layout_marginLeft="70dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+<!--</LinearLayout>-->
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    android:orientation="horizontal">
-
-        <Button
-            android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:weightSum="3"
+        >
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/time_from"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:id="@+id/from"
-            android:onClick="showTime"
-
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/button4"
-           android:layout_marginLeft="30dp" />
-
-        <Button
-            android:layout_width="150dp"
+            android:text="At Day"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/time_to"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:onClick="showTime"
-            android:id="@+id/to"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentRight="true" />
+            android:textSize="25sp"
 
+            android:id="@+id/at_day"
+            android:layout_weight="2"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/darkness"
+            />
     </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/time_from"-->
+            <!--style="@style/Base.Widget.AppCompat.Button.Colored"-->
+            <!--android:textAppearance="?android:textAppearanceLarge"-->
+            <!--android:id="@+id/from"-->
+            <!--android:onClick="showTime"-->
+
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:layout_below="@+id/button4"-->
+           <!--android:layout_marginLeft="30dp" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/time_to"-->
+            <!--style="@style/Base.Widget.AppCompat.Button.Colored"-->
+            <!--android:textAppearance="?android:textAppearanceLarge"-->
+            <!--android:onClick="showTime"-->
+            <!--android:id="@+id/to"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:layout_below="@+id/textView3"-->
+            <!--android:layout_alignParentRight="true" />-->
+
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

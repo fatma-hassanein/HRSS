@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="eg.intercom.hrss.activities.MissionActivity">
+    tools:context="eg.intercom.hrss.activities.VacationActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/vac_list"

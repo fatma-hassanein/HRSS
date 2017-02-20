@@ -59,7 +59,8 @@ public class NewVacationActivity extends AppCompatActivity implements APIListene
     SegmentedGroup segmented;
     private RadioGroup vacGroup;
     private RadioButton vacType;
-
+    Date from = null;
+    Date to = null;
     public JSONObject resultObject = null;
     public String msg;
     String checkstartDate;
@@ -82,13 +83,30 @@ public class NewVacationActivity extends AppCompatActivity implements APIListene
 //        startBtn = (Button) findViewById(R.id.start_date);
 //        endBtn = (Button) findViewById(R.id.end_date);
         fromT = (TextView) findViewById(R.id.from_text);
+
         fromT.setTypeface(Utility.applyCustomFonts("Roboto-Black.ttf", mContext));
         String currentDateTimeString = DateFormat.getDateInstance().format(new Date());
         vacGroup = (RadioGroup) findViewById(R.id.vac_group);
         toT = (TextView) findViewById(R.id.to_text);
         toT.setTypeface(Utility.applyCustomFonts("Roboto-Black.ttf", mContext));
+
         toT.setText(currentDateTimeString);
+
         fromT.setText(currentDateTimeString);
+        fromDate = fromT.getText().toString();
+        toDate = toT.getText().toString();
+        SimpleDateFormat simFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat input = new SimpleDateFormat("dd MMM yyyy");
+
+        try {
+            from = input.parse(fromDate);
+            to = input.parse(toDate);
+            fromT.setText(simFormat.format(from));
+            toT.setText(simFormat.format(to));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         fromT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +173,13 @@ public class NewVacationActivity extends AppCompatActivity implements APIListene
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat simFormat = new SimpleDateFormat("dd/mm/yyyy");
 
+//                try {
+//                    oneWayTripDate = input.parse(date);                 // parse input
+//                    tripDate.setText(output.format(oneWayTripDate));    // format output
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
                 vacType = (RadioButton) findViewById(selectedID);
                 spinnerText = vacType.getText().toString();
                 //spinnerText = String.valueOf(spinner1.getItemAtPosition(position));
@@ -206,15 +229,19 @@ public class NewVacationActivity extends AppCompatActivity implements APIListene
                 Log.v(TAG, "multiple from date " + fromT.getText());
                 Log.v(TAG, "multiple to date " + toT.getText());
                 if (Utility.isNotNull(fromDate) && Utility.isNotNull(toDate)) {
-                    Date from = null;
-                    Date to = null;
-                    try {
-                        from = simFormat.parse(fromDate);
-                        to = simFormat.parse(toDate);
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+//                    SimpleDateFormat simFormat = new SimpleDateFormat("dd/MM/yyyy");
+//                    SimpleDateFormat output = new SimpleDateFormat("dd/mm/yyyy");
+//                    SimpleDateFormat input = new SimpleDateFormat("dd MMM yyyy");
+//                    Date from = null;
+//                    Date to = null;
+//                    try {
+//                        from = input.parse(fromDate);
+//                        to = input.parse(toDate);
+//                        fromT.setText(simFormat.format(from));
+//                        toT.setText(simFormat.format(to));
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
 
                     if (from.getTime() > to.getTime()) {
                         new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)

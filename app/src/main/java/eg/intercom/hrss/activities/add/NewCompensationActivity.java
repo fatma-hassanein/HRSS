@@ -1,8 +1,11 @@
 package eg.intercom.hrss.activities.add;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,11 +15,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +44,10 @@ import okhttp3.OkHttpClient;
  */
 
 public  class NewCompensationActivity extends AppCompatActivity implements APIListener {
-    DatePicker compDatePicker;
+   // DatePicker compDatePicker;
     Calendar c;
+    public static String ARG_CLICKED;
+   String mgrCode,mgrName,empName;
     String TAG = "Compensation Test";
     private SweetAlertDialog sd;
     Context mContext;
@@ -47,8 +57,10 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
     String month ;
     String descrip;
     String day;
+    static TextView atDay;
     String date;
     public  JSONObject resultObject=null;
+    String dateToday;
 
     EditText remarks;
     String remark;
@@ -70,20 +82,46 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
          remarks = (EditText) findViewById(R.id.comp_remark);
         remarks.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
         comSubmit = (Button) findViewById(R.id.comp_send);
-        compDatePicker = (DatePicker) findViewById(R.id.datePicker_new_compensation);
+        atDay = (TextView) findViewById(R.id.at_day);
+        String currentDateTimeString = DateFormat.getDateInstance().format(new Date());
+        atDay.setText(currentDateTimeString);
+        //c = Calendar.getInstance();
+        mgrCode = Constants.getDataInSharedPrefrences(Constants.MGR_CODE, mContext);
+        mgrName = Constants.getDataInSharedPrefrences(Constants.MGR_NAME, mContext);
+        empName = Constants.getDataInSharedPrefrences(Constants.EMP_NAME, mContext);
+        Date today;
+        dateToday = atDay.getText().toString();
 
-        c = Calendar.getInstance();
+        SimpleDateFormat simFormat = new SimpleDateFormat("dd/MM/yyyy");
+       // SimpleDateFormat output = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat input = new SimpleDateFormat("dd MMM yyyy");
 
-        compDatePicker.setMaxDate(c.getTimeInMillis());
+        try {
+            today = input.parse(dateToday);
+            atDay.setText(simFormat.format(today));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        atDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             showDate(v);
+                ARG_CLICKED=  "today";
+
+            }
+        });
+        //compDatePicker.setMaxDate(c.getTimeInMillis());
         comSubmit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                year = compDatePicker.getYear()+"";
-                 month =  compDatePicker.getMonth()+1+"";
-                 day = compDatePicker.getDayOfMonth()+"";
-                 date = day+"/"+month+"/"+year;
+//                year = compDatePicker.getYear()+"";
+//                 month =  compDatePicker.getMonth()+1+"";
+//                 day = compDatePicker.getDayOfMonth()+"";
+            //    dateToday = atDay.getText().toString();
+
+              //   date = day+"/"+month+"/"+year;
                 descrip= remarks.getText().toString();
                 Log.v("year :: ", "year :: " + year );
                 Log.v("month ::", "month :: " + month);
@@ -98,7 +136,7 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
 
 
                        setCompensation();
-
+                        dateToday= null;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -265,17 +303,18 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
 
     Utility.showProgressDialog(NewCompensationActivity.this, getString(R.string.Loading));
     Utility.generateRetrofitHttpHeader(this);
-    year = compDatePicker.getYear()+"";
-    month =  compDatePicker.getMonth()+1+"";
-    day = compDatePicker.getDayOfMonth()+"";
-    date = day+"/"+month+"/"+year;
+//    year = compDatePicker.getYear()+"";
+//    month =  compDatePicker.getMonth()+1+"";
+//    day = compDatePicker.getDayOfMonth()+"";
+   // date = day+"/"+month+"/"+year;
+    dateToday = atDay.getText().toString();
     descrip= remarks.getText().toString();
     Map<String, String> mRetrofitParams = new HashMap<>();
-    mRetrofitParams.put("dateTime", date);
-    mRetrofitParams.put("remarks",remark);
-    mRetrofitParams.put("employeeName", "EmpName");
-    mRetrofitParams.put("managerCode", "1521");
-    mRetrofitParams.put("managerName","MgrName");
+    mRetrofitParams.put("dateTime", dateToday);
+    mRetrofitParams.put("remarks",descrip);
+    mRetrofitParams.put("employeeName", empName);
+    mRetrofitParams.put("managerCode", mgrCode);
+    mRetrofitParams.put("managerName",mgrName);
     Map<String, String> mCompensatiionHeader = new HashMap<>();
     mCompensatiionHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
     Log.e("mRetrofitHeader Act",mCompensatiionHeader.size() +" ");
@@ -291,11 +330,44 @@ public  class NewCompensationActivity extends AppCompatActivity implements APILi
 
 }
 
-//
-//    public void showDate (View view){
-//        DateDialog dateDialog = new DateDialog();
-//
-//        dateDialog.show(getSupportFragmentManager(),"Date");
-//
-//    }
+
+    public void showDate(View view) {
+        DateDialog dateDialog = new DateDialog();
+        dateDialog.show(getSupportFragmentManager(), "Date");
+
+    }
+    public static class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datedialog;
+
+
+            datedialog = new DatePickerDialog(getActivity(), this, year, month, day);
+
+
+            return datedialog;
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            eg.intercom.hrss.helpers.Log.e("onTime set TimeHandler", dayOfMonth + "found");
+            int monthoFYear = monthOfYear + 1;
+            NewCompensationActivity.getCompensationDate(dayOfMonth, monthoFYear, year);
+        }
+    }
+
+    public static void getCompensationDate(int day, int month, int year) {
+
+        System.out.println("dddddddd      " + ARG_CLICKED);
+
+        if (ARG_CLICKED == "today") {
+            atDay.setText(day + "/" + month + "/" + year);
+
+//            startBtn.setText(day + "/" + month + "/" + year);
+//            startBtn.setPressed(false);
+        }    }
 }

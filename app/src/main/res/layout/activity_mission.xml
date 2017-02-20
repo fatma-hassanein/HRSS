@@ -18,8 +18,8 @@
             android:layout_marginTop="16dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:background="@color/fab_activity_primary"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:background="@color/gray_btn_bg_color"/>
 
     </android.support.v4.view.ViewPager>
 

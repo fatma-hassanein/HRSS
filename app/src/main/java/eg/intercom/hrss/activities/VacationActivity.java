@@ -3,6 +3,7 @@ package eg.intercom.hrss.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import eg.intercom.hrss.R;
 import eg.intercom.hrss.activities.add.NewVacationActivity;
 import eg.intercom.hrss.adapters.VacationAdapter;
+import eg.intercom.hrss.adapters.ViewPagerAdapter;
 import eg.intercom.hrss.api.APIListener;
 import eg.intercom.hrss.api.LstVacHst;
 import eg.intercom.hrss.api.ServerConfig;
@@ -64,6 +66,9 @@ public class VacationActivity extends SlidingActivity implements APIListener {
                     }
                 }
         );
+
+        setHeaderContent(R.layout.header_photo_history);
+
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra(MainActivity.ARG_USE_EXPANSION, false)) {

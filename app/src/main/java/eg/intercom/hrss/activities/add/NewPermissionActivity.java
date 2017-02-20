@@ -1,5 +1,6 @@
 package eg.intercom.hrss.activities.add;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -14,11 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,23 +47,27 @@ import okhttp3.OkHttpClient;
 
 public  class NewPermissionActivity extends AppCompatActivity implements APIListener{
   public String msg;
-     Calendar c;
+    // Calendar c;
     String TAG = "PermissionActivity Test";
-    DatePicker perDatePicker;
-   static  Button fromBtn;
+    //DatePicker perDatePicker;
+  // static  Button fromBtn;
    public String token;
     int hourOfDay;
+    String fromDate = null;
+    String toDate = null;
     Button submit;
     int minute;
-   static Button toBtn;
-    String year ;
-    String month ;
-    String day;
+  // static Button toBtn;
+    //String year ;
+    //String month ;
+    //String day;
     String date;
     EditText remarks;
     String remark;
     public  JSONObject resultObject=null;
-
+    static TextView fromT, toT;
+    String dateToday;
+    static TextView atDay;
 
     private static String ARG_CLICKED ;
     Context mContext;
@@ -79,63 +88,114 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
         mContext=this;
         Log.e("New Per,","herer");
         Log.e("NewPermissionActivity Token",Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext)+"hfhurhuhur");
-        toBtn =  (Button)findViewById(R.id.to);
-        fromBtn =  (Button)findViewById(R.id.from);
+       // toBtn =  (Button)findViewById(R.id.to);
+       // fromBtn =  (Button)findViewById(R.id.from);
+        fromT = (TextView) findViewById(R.id.from_text);
+        toT = (TextView) findViewById(R.id.to_text);
         submit = (Button) findViewById(R.id.send_per);
         remarks = (EditText) findViewById(R.id.remark);
         remarks.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
-        perDatePicker = (DatePicker)findViewById(R.id.datePicker_new_permission);
-       c = Calendar.getInstance();
-        perDatePicker.setMaxDate(c.getTimeInMillis());
+      //  perDatePicker = (DatePicker)findViewById(R.id.datePicker_new_permission);
+       //c = Calendar.getInstance();
+       // perDatePicker.setMaxDate(c.getTimeInMillis());
+        fromT.setTypeface(Utility.applyCustomFonts("Roboto-Black.ttf", mContext));
+        toT.setTypeface(Utility.applyCustomFonts("Roboto-Black.ttf", mContext));
+        String currentTimeString = java.text.DateFormat.getTimeInstance().format(new Date());
+        String currentDateTimeString = java.text.DateFormat.getDateInstance().format(new Date());
+        Date today;
+        atDay = (TextView) findViewById(R.id.at_day);
 
+        atDay.setText(currentDateTimeString);
+        toT.setText(currentTimeString);
+        fromT.setText(currentTimeString);
+        fromDate = fromT.getText().toString();
+        toDate = toT.getText().toString();
         Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext);
+        dateToday = atDay.getText().toString();
 
-        toBtn.setOnClickListener(new View.OnClickListener() {
+
+        SimpleDateFormat simFormat = new SimpleDateFormat("dd/MM/yyyy");
+        // SimpleDateFormat output = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat input = new SimpleDateFormat("dd MMM yyyy");
+
+        try {
+            today = input.parse(dateToday);
+            atDay.setText(simFormat.format(today));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        atDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               toBtn.setPressed(true);
-
-
-                showTime(v);
-                ARG_CLICKED ="to";
-                System.out.println(" on to date Clicked");
-
+                showDate(v);
+                ARG_CLICKED=  "today";
 
             }
         });
-        fromBtn.setOnClickListener(new View.OnClickListener() {
+
+//        toBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               toBtn.setPressed(true);
+//
+//
+//                showTime(v);
+//                ARG_CLICKED ="to";
+//                System.out.println(" on to date Clicked");
+//
+//
+//            }
+//        });
+        fromT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            fromBtn.setPressed(true);
-
-
-
                 showTime(v);
-                ARG_CLICKED ="from";
-                System.out.println(" on from date Clicked");
+                ARG_CLICKED = "from";
+            }
+        });
+//        fromBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            fromBtn.setPressed(true);
+//
+//
+//
+//                showTime(v);
+//                ARG_CLICKED ="from";
+//                System.out.println(" on from date Clicked");
+//            }
+//        });
+        toT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTime(v);
+                ARG_CLICKED = "to";
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
 
-                 year = perDatePicker.getYear()+"";
-                 month =  perDatePicker.getMonth()+1+"";
-                month = month.length()<2 ?  "0"+month : month ;
-                 day = perDatePicker.getDayOfMonth()+"";
-                day = day.length()<2 ?  "0"+day : day ;
-                date = day+"/"+month+"/"+year;
-                String fromDate = null;
-                String toDate = null;
-                if(Utility.isNotNull(fromBtn.getText().toString()))
-                    fromDate = date + " " +fromBtn.getText().toString();
-
+//                 year = perDatePicker.getYear()+"";
+//                 month =  perDatePicker.getMonth()+1+"";
+//                month = month.length()<2 ?  "0"+month : month ;
+//                 day = perDatePicker.getDayOfMonth()+"";
+//                day = day.length()<2 ?  "0"+day : day ;
+//                date = day+"/"+month+"/"+year;
+                 fromDate = null;
+                 toDate = null;
+               // if(Utility.isNotNull(fromBtn.getText().toString()))
+                //    fromDate = dateToday + " " +fromBtn.getText().toString();
+                if(Utility.isNotNull(fromT.getText().toString()))
+                    fromDate = dateToday + " " +fromT.getText().toString();
                 if(fromDate.contains("From")){
 
                         fromDate=null;
                     }
-                if(Utility.isNotNull(toBtn.getText().toString()))
-                    toDate = date + " " +toBtn.getText().toString();
+               // if(Utility.isNotNull(toBtn.getText().toString()))
+                 //   toDate = dateToday + " " +toBtn.getText().toString();
+                if(Utility.isNotNull(toT.getText().toString()))
+                    toDate = dateToday + " " +toT.getText().toString();
                 if(toDate.contains("To")){
 
                     toDate=null;
@@ -145,10 +205,10 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
 
                 remark = remarks.getText().toString();
                 Log.e("test",remark);
-               Log.e(TAG, "year :: " + year );
-                Log.v(TAG, "month :: " + month);
-                Log.v(TAG, "day :: " + day);
-                Log.v(TAG, "date :: " + date);
+              // Log.e(TAG, "year :: " + year );
+               // Log.v(TAG, "month :: " + month);
+               // Log.v(TAG, "day :: " + day);
+               // Log.v(TAG, "date :: " + date);
                 Log.v(TAG,"partial from time :"+ fromDate);
                 Log.v(TAG,"partial to time "+ toDate) ;
                 Log.v(TAG,"remark ::" +remark);
@@ -178,7 +238,7 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
 
 
                             setPermission();
-
+                            dateToday=null;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }                    }
@@ -242,15 +302,16 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
 
         Utility.showProgressDialog(NewPermissionActivity.this, getString(R.string.Loading));
         Utility.generateRetrofitHttpHeader(this);
-         year = perDatePicker.getYear()+"";
-         month =  perDatePicker.getMonth()+1+"";
-        month = month.length()<2 ?  "0"+month : month ;
-         day = perDatePicker.getDayOfMonth()+"";
-        day = day.length()<2 ?  "0"+day : day ;
-         date = day+"/"+month+"/"+year;
+//         year = perDatePicker.getYear()+"";
+//         month =  perDatePicker.getMonth()+1+"";
+//        month = month.length()<2 ?  "0"+month : month ;
+//         day = perDatePicker.getDayOfMonth()+"";
+//        day = day.length()<2 ?  "0"+day : day ;
+         //date = day+"/"+month+"/"+year;
+        dateToday = atDay.getText().toString();
         Map<String, String> mRetrofitParams = new HashMap<>();
-        mRetrofitParams.put("fromDateTime", date + " " +fromBtn.getText().toString());
-        mRetrofitParams.put("toDateTime",  date + " " +toBtn.getText().toString());
+        mRetrofitParams.put("fromDateTime", dateToday + " " +fromT.getText().toString());
+        mRetrofitParams.put("toDateTime",  dateToday + " " +toT.getText().toString());
         mRetrofitParams.put("permCategory", "1");
         mRetrofitParams.put("permType", "121");
         mRetrofitParams.put("remarks",remark);
@@ -482,14 +543,57 @@ public  class NewPermissionActivity extends AppCompatActivity implements APIList
         android.util.Log.v("","ssssssss      "+ARG_CLICKED);
 
         if (ARG_CLICKED=="from") {
-            fromBtn.setText(stHours + ":" + stMinute);
-            fromBtn.setPressed(false);
+
+           // fromBtn.setText(stHours + ":" + stMinute);
+            fromT.setText(stHours + ":" + stMinute);
+
+            //fromBtn.setPressed(false);
         } else  {
-            toBtn.setText(stHours + ":" + stMinute);
-            toBtn.setPressed(false);
+           // toBtn.setText(stHours + ":" + stMinute);
+           // toBtn.setPressed(false);
+            toT.setText(stHours + ":" + stMinute);
+
         }
     }
+    public void showDate(View view) {
+        DateDialog dateDialog = new DateDialog();
+        dateDialog.show(getSupportFragmentManager(), "Date");
 
+    }
+    public static class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datedialog;
+
+
+            datedialog = new DatePickerDialog(getActivity(), this, year, month, day);
+
+
+            return datedialog;
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            eg.intercom.hrss.helpers.Log.e("onTime set TimeHandler", dayOfMonth + "found");
+            int monthoFYear = monthOfYear + 1;
+            getPermissionDate(dayOfMonth, monthoFYear, year);
+        }
+
+    }
+    public static void getPermissionDate(int day, int month, int year) {
+
+        System.out.println("dddddddd      " + ARG_CLICKED);
+
+        if (ARG_CLICKED == "today") {
+            atDay.setText(day + "/" + month + "/" + year);
+
+//            startBtn.setText(day + "/" + month + "/" + year);
+//            startBtn.setPressed(false);
+        }    }
     public  static class TimeHandler extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
         Context context;
         TimePickerDialog timedialog;
