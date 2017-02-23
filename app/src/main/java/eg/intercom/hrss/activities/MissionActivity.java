@@ -3,6 +3,7 @@ package eg.intercom.hrss.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,9 +50,10 @@ public class MissionActivity extends SlidingActivity{
 
 
         setPrimaryColors(
-                getResources().getColor(R.color.mis_activity_dark),
-                getResources().getColor(R.color.mis_activity_dark)
+                getResources().getColor(R.color.colorPrimaryDark),
+                getResources().getColor(R.color.colorPrimary)
         );
+
         setContent(R.layout.activity_mission);
         setHeaderContent(R.layout.header_photo_history);
 //        setFab(
@@ -68,7 +70,16 @@ public class MissionActivity extends SlidingActivity{
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+//            TabLayout.Tab tab = tabLayout.getTabAt(i);
+//            tab.setCustomView(pagerAdapter.getTabView(i));
+//        }
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra(MainActivity.ARG_USE_EXPANSION, false)) {

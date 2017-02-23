@@ -57,6 +57,8 @@ public class FragmentTab1 extends Fragment implements APIListener {
         mContext= getContext();
         View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
         misHisView = (RecyclerView) rootView.findViewById(R.id.mis_list);
+        misHisView.setHasFixedSize(true);
+
         getMissionHistoy();
 
         return rootView;
@@ -75,16 +77,7 @@ public class FragmentTab1 extends Fragment implements APIListener {
 
         mRetrofitHeader.put("token", TOKEN);
         Utility.generateRetrofitHttpHeader(getActivity());
-//        resultObject=new JSONObject(response);
-//
-//        String mResult= resultObject.getString("result");
-//        if(mResult.equalsIgnoreCase("1")){
-//            openingBalance= resultObject.getString("openingBalance");
-//            balance= resultObject.getString("balance");
 
-//    Map<String, String> mNewHeader = new HashMap<>();
-//
-//    mNewHeader.put("token", Constants.getDataInSharedPrefrences(Constants.USER_TOKEN,mContext));
         Constants.httpClient = new OkHttpClient.Builder();
 
         Constants.httpClient.addInterceptor(new RetrofitInterceptor(mRetrofitHeader, mContext));
@@ -100,7 +93,6 @@ public class FragmentTab1 extends Fragment implements APIListener {
             Utility.removeProgressDialog();
         eg.intercom.hrss.helpers.Log.e("person Response in main", response + "gg");
         try {
-//			results = new LstMisReq();
             MissionHistoryResults missionHistoryResults = new MissionHistoryResults();
             Gson gson = new Gson();
 
@@ -111,8 +103,13 @@ public class FragmentTab1 extends Fragment implements APIListener {
                 List<LstMisHst> hstReq = missionHistoryResults.getLstPerHst();
                 Log.v(TAG, "onehstReq" + hstReq);
 
+                for(int i = 0; i < hstReq.size(); i++)
+                {
+                 if(hstReq.get(i).getStatus().equals("0"))
+                     misList.add(hstReq.get(i));
+                }
 
-                misList = (ArrayList<LstMisHst>) hstReq;
+               // misList = (ArrayList<LstMisHst>) hstReq;
                 getAdapterValue();
             } else {
             }

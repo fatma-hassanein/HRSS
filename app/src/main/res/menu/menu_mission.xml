@@ -1,6 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="eg.intercom.hrss.activities.MissionActivity">
+
+    <item
+        android:id="@+id/cancel"
+        android:title="Cancel Request" />
 
 </menu>

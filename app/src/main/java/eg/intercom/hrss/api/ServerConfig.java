@@ -23,6 +23,7 @@ public class ServerConfig {
     public static final String COMPENSATION = "comp/";
     public static final String ACCEPT = "/accept";
     public static final String REJECT = "/cancel";
+    public static final String CANCEL = "/cancel";
 
     public static final String METHOD_GET = "get";
 
@@ -31,9 +32,8 @@ public class ServerConfig {
     public static final int AcceptID = 1;
     public static final int RejectID = 2;
     public static final int CancelID = 3;
-
     public static final int VAcceptID = 4;
-    public static final int VCancelID = 6;
+   // public static final int VCancelID = 6;
 
     private ServerConfig() {
 

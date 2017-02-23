@@ -7,7 +7,12 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import eg.intercom.hrss.R;
+import eg.intercom.hrss.activities.MissionActivity;
 import eg.intercom.hrss.fragments.FragmentTab1;
 import eg.intercom.hrss.fragments.FragmentTab2;
 
@@ -48,4 +53,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return tabtitles[position];
     }
+
+//    public View getTabView(int position) {
+//        View tab = LayoutInflater.from(MissionActivity.this).inflate(R.layout.custom_tab, null);
+//        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+//        tv.setText(tabTitles[position]);
+//        return tab;
+//    }
 }
